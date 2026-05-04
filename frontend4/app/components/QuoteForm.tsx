@@ -47,7 +47,7 @@ export default function QuoteForm({ formId = "quote-upload", formClassName }: { 
         <div key={f.name}>
           <label
             htmlFor={`qf-${f.name}`}
-            className="mb-2 block type-form-label text-foreground/70"
+            className="mb-2 block type-micro text-foreground/70"
           >
             {f.label} {f.required && <span className="text-brand">*</span>}
           </label>
@@ -65,7 +65,7 @@ export default function QuoteForm({ formId = "quote-upload", formClassName }: { 
       <div>
         <label
           htmlFor="qf-message"
-          className="mb-2 block type-form-label text-foreground/70"
+          className="mb-2 block type-micro text-foreground/70"
         >
           Message
         </label>
@@ -79,12 +79,12 @@ export default function QuoteForm({ formId = "quote-upload", formClassName }: { 
       </div>
 
       <div>
-        <label className="mb-2 block type-form-label text-foreground/70">
+        <label className="mb-2 block type-micro text-foreground/70">
           Upload
         </label>
         <label
           htmlFor={formId}
-          className="flex w-full cursor-pointer items-center justify-center gap-3 border border-accent bg-accent/10 px-6 py-4 type-label text-accent transition-colors hover:bg-accent hover:text-background"
+          className="flex w-full cursor-pointer items-center justify-center gap-3 border border-accent bg-accent/10 px-6 py-4 type-micro text-accent transition-colors hover:bg-accent hover:text-background"
         >
           <svg
             width="16"
@@ -116,7 +116,7 @@ export default function QuoteForm({ formId = "quote-upload", formClassName }: { 
       <button
         type="submit"
         disabled={status === "sending"}
-        className="mt-3 block w-full bg-brand px-10 py-4 type-label text-on-brand hover:bg-brand-light disabled:opacity-60"
+        className="mt-3 block w-full bg-brand px-10 py-4 type-micro text-on-brand hover:bg-brand-light disabled:opacity-60"
       >
         {status === "sending" ? "Sending…" : "Send Inquiry →"}
       </button>

@@ -1,0 +1,252 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Foundations/Spacing" />
+
+export const SURFACE = {
+  background: "#141311",
+  color: "#EDEBE7",
+  border: "1px solid #3A3733",
+};
+
+export const META = {
+  fontFamily: "ui-monospace, SFMono-Regular, Menlo, monospace",
+  fontSize: "12px",
+  color: "#D8D4CE",
+  lineHeight: 1.6,
+};
+
+export const Field = ({ name, value }) => (
+  <span>
+    <strong style={{ color: "#EDEBE7", fontWeight: 600 }}>{name}</strong>
+    {"  "}
+    {value}
+  </span>
+);
+
+{/* Tailwind v4 default spacing scale (--spacing: 0.25rem = 4px base unit).
+    Values are pixel measurements at the default 16px root font size. */}
+
+export const SCALE = [
+  ["0", 0],
+  ["px", 1],
+  ["0.5", 2],
+  ["1", 4],
+  ["1.5", 6],
+  ["2", 8],
+  ["2.5", 10],
+  ["3", 12],
+  ["3.5", 14],
+  ["4", 16],
+  ["5", 20],
+  ["6", 24],
+  ["7", 28],
+  ["8", 32],
+  ["9", 36],
+  ["10", 40],
+  ["11", 44],
+  ["12", 48],
+  ["14", 56],
+  ["16", 64],
+  ["20", 80],
+  ["24", 96],
+  ["28", 112],
+  ["32", 128],
+  ["36", 144],
+  ["40", 160],
+  ["44", 176],
+  ["48", 192],
+  ["52", 208],
+  ["56", 224],
+  ["60", 240],
+  ["64", 256],
+  ["72", 288],
+  ["80", 320],
+  ["96", 384],
+];
+
+export const Tick = ({ token, px }) => {
+  const rem = token === "px" ? "1px" : `${px / 16}rem`;
+  const remLabel = token === "0" ? "0" : token === "px" ? "1px" : `${px / 16}rem`;
+  return (
+    <div
+      style={{
+        display: "grid",
+        gridTemplateColumns: "60px 110px 70px 1fr",
+        gap: "1.25rem",
+        alignItems: "center",
+        padding: "0.55rem 0",
+        borderBottom: "1px solid #3A3733",
+      }}
+    >
+      <code style={{ ...META, color: "#EDEBE7", fontWeight: 600 }}>{token}</code>
+      <code style={{ ...META }}>{remLabel}</code>
+      <code style={{ ...META }}>{px}px</code>
+      <div
+        style={{
+          background: "#D4834A",
+          height: "10px",
+          width: `${Math.min(px, 600)}px`,
+        }}
+      />
+    </div>
+  );
+};
+
+export const Hero = () => (
+  <div style={{ ...SURFACE, padding: "3rem 2.5rem", marginTop: "1rem", marginBottom: "2.5rem" }}>
+    <span className="type-eyebrow" style={{ display: "inline-block", marginBottom: "1rem" }}>
+      Foundations
+    </span>
+    <h1 className="type-title-xl" style={{ margin: 0, marginBottom: "1.25rem" }}>
+      Spacing
+    </h1>
+    <p className="type-body-lg" style={{ margin: 0, maxWidth: "44rem" }}>
+      Tailwind v4's default spacing scale, unmodified. The base unit is
+      <code style={{ ...META, color: "#EDEBE7" }}> 0.25rem (4px)</code>; every
+      `p-*`, `m-*`, `gap-*`, `space-*`, `w-*`, `h-*`, and similar utility
+      resolves to a multiple of that.
+    </p>
+  </div>
+);
+
+<Hero />
+
+## The base unit
+
+```
+1 spacing unit = 0.25rem = 4px (at the default 16px root font size)
+```
+
+A class like `p-4` resolves to `padding: 1rem` (4 × 0.25rem = 16px). The
+scale skips up in 0.25rem steps from 0 to 12, then doubles in pace as the
+values get larger (14, 16, 20, 24, … 96). This keeps the scale finite —
+36 tokens cover the full range from a single pixel to 384px.
+
+This codebase **does not customise the spacing scale**. There's no `--spacing`
+override and no extra entries in `@theme`. What you see below is what
+Tailwind ships.
+
+---
+
+## The scale
+
+Each row shows the token, the rem value, the pixel value at the default
+root font size, and a brand-orange bar drawn at the corresponding width
+(capped at 600px to keep the page readable).
+
+<div style={{ ...SURFACE, padding: "1.5rem 1.75rem", marginTop: "1rem", overflow: "hidden" }}>
+  <div
+    style={{
+      display: "grid",
+      gridTemplateColumns: "60px 110px 70px 1fr",
+      gap: "1.25rem",
+      alignItems: "center",
+      padding: "0.55rem 0",
+      borderBottom: "1px solid #3A3733",
+      ...META,
+      color: "#EDEBE7",
+      fontWeight: 600,
+    }}
+  >
+    <span>token</span>
+    <span>rem</span>
+    <span>px</span>
+    <span>visual</span>
+  </div>
+  {SCALE.map(([token, px]) => (
+    <Tick key={token} token={token} px={px} />
+  ))}
+</div>
+
+---
+
+## How tokens map to utilities
+
+Most utilities take a token name and apply it as a property:
+
+```tsx
+<div className="p-4">          {/* padding: 1rem  */}
+<div className="px-8 py-12">    {/* horizontal 2rem, vertical 3rem */}
+<div className="mt-24 mb-16">   {/* margin-top 6rem, margin-bottom 4rem */}
+<div className="gap-9">         {/* gap: 2.25rem (used in nav row) */}
+<div className="space-y-10">    {/* vertical rhythm — 2.5rem between children */}
+```
+
+Negative spacing works too: `-mt-4` is `margin-top: -1rem`. Fractional
+tokens (`0.5`, `1.5`, `2.5`, `3.5`) cover the small adjustments
+typography sometimes needs.
+
+### Common patterns in this codebase
+
+| Pattern | Token | Where used |
+|---|---|---|
+| Page horizontal padding | `px-8` (2rem · 32px) | Every `mx-auto max-w-[1280px]` container |
+| Section vertical rhythm | `pt-24 pb-12` or `py-20` | Section headers and footers |
+| Component internal padding | `p-6` to `p-8` (1.5–2rem) | Cards, accordion answers |
+| Form field gap | `space-y-5` (1.25rem) | QuoteForm field stack |
+| Header nav link gap | `gap-9` (2.25rem) | Header desktop nav |
+| Footer column gap | `gap-10` (2.5rem) | Footer 4-column grid |
+
+---
+
+## Arbitrary values
+
+Tailwind v4 supports `[bracket]` syntax for one-off values that don't fit
+the scale. The codebase uses these where a design constraint is genuinely
+arbitrary — not as a way to skip thinking about the scale.
+
+<div style={{ ...SURFACE, padding: "1.5rem 1.75rem", marginTop: "1rem" }}>
+  <div style={{ display: "grid", gridTemplateColumns: "200px 1fr", gap: "1rem 2rem", ...META }}>
+    <code style={{ color: "#EDEBE7", fontWeight: 600 }}>max-w-[1280px]</code>
+    <span>Page container width. Used in every `mx-auto` block — header, footer, every section.</span>
+
+    <code style={{ color: "#EDEBE7", fontWeight: 600 }}>pt-[180px]</code>
+    <span>Services-page hero top padding. Accommodates the fixed header without colliding with the eyebrow.</span>
+
+    <code style={{ color: "#EDEBE7", fontWeight: 600 }}>min-h-[640px]</code>
+    <span>Home hero minimum height — guards against very short viewports collapsing the video section.</span>
+
+    <code style={{ color: "#EDEBE7", fontWeight: 600 }}>w-[2.5rem] · w-[3px]</code>
+    <span>Accordion number badge minimum width and toggle-icon stroke width — values picked to match the design exactly.</span>
+
+    <code style={{ color: "#EDEBE7", fontWeight: 600 }}>h-[420px], w-[380px], etc.</code>
+    <span>Image and figure dimensions in gallery and services pages — each tied to a specific photo aspect ratio.</span>
+  </div>
+</div>
+
+### When to use a scale token vs an arbitrary value
+
+✅ **Use a scale token** when you're laying out something that wants to
+breathe with the rest of the page — section padding, card spacing,
+typographic rhythm. The scale is what gives the site its consistent
+vertical music.
+
+✅ **Use `[arbitrary]`** when a value is fixed by an external constraint —
+a container width that matches a specific breakpoint, a header offset
+that compensates for a fixed bar, an image dimension that matches an
+aspect ratio. These are exceptions, not defaults.
+
+❌ **Don't reach for `[18px]` because `p-5` (20px) is "too much".** That's
+the scale doing its job — pulling the design toward a coherent rhythm.
+The right answer is usually `p-4` or `p-5`, not `p-[18px]`.
+
+---
+
+## Tailwind v4 specifics
+
+Two things changed in v4 that affect spacing:
+
+1. **No `tailwind.config.ts` extension.** The scale lives in Tailwind's
+   defaults — there's no config file in this project to override or
+   extend. To add a spacing token, set `--spacing-*` inside
+   `@theme inline` in `globals.css`.
+2. **The `--spacing` base.** v4 derives the entire scale from a single
+   `--spacing` variable. Override it once and every token rescales:
+
+   ```css
+   @theme inline {
+     --spacing: 0.2rem;  /* would shrink the whole scale to 80% */
+   }
+   ```
+
+   Don't do that here — the design was tuned for the default 4px base.

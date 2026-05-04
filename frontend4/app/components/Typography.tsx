@@ -1,38 +1,28 @@
 import { type ReactNode, type JSX } from "react";
 
 type Variant =
-  | "eyebrow"
-  | "h1"
-  | "h2"
-  | "h2-sm"
-  | "h3"
-  | "body"
-  | "body-sm"
+  | "title-xl"
+  | "title-lg"
+  | "title-md"
+  | "title-sm"
   | "body-lg"
+  | "body"
   | "caption"
-  | "label"
-  | "logo"
-  | "nav"
-  | "form-label"
-  | "badge"
-  | "stat";
+  | "eyebrow"
+  | "micro-lg"
+  | "micro";
 
 const variantMap: Record<Variant, { tag: keyof JSX.IntrinsicElements; className: string }> = {
-  eyebrow:      { tag: "p",     className: "type-eyebrow" },
-  h1:           { tag: "h1",    className: "type-h1" },
-  h2:           { tag: "h2",    className: "type-h2" },
-  "h2-sm":      { tag: "h2",    className: "type-h2-sm" },
-  h3:           { tag: "h3",    className: "type-h3" },
-  body:         { tag: "p",     className: "type-body" },
-  "body-sm":    { tag: "p",     className: "type-body-sm" },
-  "body-lg":    { tag: "p",     className: "type-body-lg" },
-  caption:      { tag: "p",     className: "type-caption" },
-  label:        { tag: "span",  className: "type-label" },
-  logo:         { tag: "span",  className: "type-logo" },
-  nav:          { tag: "span",  className: "type-nav" },
-  "form-label": { tag: "label", className: "type-form-label" },
-  badge:        { tag: "span",  className: "type-badge" },
-  stat:         { tag: "p",     className: "type-stat" },
+  "title-xl": { tag: "h1",   className: "type-title-xl" },
+  "title-lg": { tag: "h2",   className: "type-title-lg" },
+  "title-md": { tag: "h3",   className: "type-title-md" },
+  "title-sm": { tag: "h4",   className: "type-title-sm" },
+  "body-lg":  { tag: "p",    className: "type-body-lg" },
+  body:       { tag: "p",    className: "type-body" },
+  caption:    { tag: "p",    className: "type-caption" },
+  eyebrow:    { tag: "span", className: "type-eyebrow" },
+  "micro-lg": { tag: "span", className: "type-micro-lg" },
+  micro:      { tag: "span", className: "type-micro" },
 };
 
 interface Props {

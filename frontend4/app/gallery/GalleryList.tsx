@@ -53,7 +53,7 @@ export default function GalleryList({
         <div className="mx-auto max-w-[1280px] px-8 py-12">
           {visible.length === 0 ? (
             <div className="py-24 text-center">
-              <p className="type-body-sm">
+              <p className="type-body">
                 No projects in this category yet.
               </p>
             </div>
@@ -86,13 +86,13 @@ export function ProjectCardLink({ project }: { project: ProjectCard }) {
             {project.location}
           </span>
         </div>
-        <h3 className="type-h3 group-hover:text-brand">
+        <h3 className="type-title-sm group-hover:text-brand">
           {project.title}
         </h3>
-        <p className="mt-3 flex-1 type-body-sm">
+        <p className="mt-3 flex-1 type-body">
           {project.summary}
         </p>
-        <span className="mt-6 inline-block type-label text-foreground underline underline-offset-4 group-hover:text-brand">
+        <span className="mt-6 inline-block type-micro text-foreground underline underline-offset-4 group-hover:text-brand">
           View project →
         </span>
       </div>
@@ -118,7 +118,7 @@ function BeforeAfterPreview({
         Before / After
       </span>
     ) : (
-      <span className="absolute left-3 top-3 bg-background/80 px-2.5 py-1.5 type-badge text-foreground">
+      <span className="absolute left-3 top-3 bg-background/80 px-2.5 py-1.5 type-micro text-foreground">
         Before / After
       </span>
     );
@@ -166,7 +166,7 @@ function BeforeAfterPreview({
   return (
     <div className={wrapperClass}>
       <div className="absolute inset-0 grid grid-cols-2">
-        <div style={{ backgroundColor: "#3a2418" }} />
+        <div style={{ backgroundColor: "var(--surface-rust)" }} />
         <div className="bg-surface" />
       </div>
       <span className="absolute inset-y-0 left-1/2 -ml-px w-px bg-brand" />
@@ -191,7 +191,7 @@ export function SimpleProjectCard({ project }: { project: ProjectCard }) {
           {project.location}
         </span>
       </div>
-      <h3 className="type-h3 group-hover:text-brand">
+      <h3 className="type-title-sm group-hover:text-brand">
         {project.title}
       </h3>
     </Link>

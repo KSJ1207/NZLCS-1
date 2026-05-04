@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Header from "../components/Header";
 import ScrollToTop from "../components/ScrollToTop";
-import Footer from "../components/Footer";
 import BlogList from "./BlogList";
 import { sanityFetch } from "../../sanity/lib/fetch";
 import {
@@ -33,7 +31,6 @@ export default async function BlogPage() {
 
   return (
     <div className="min-h-screen w-full bg-background text-foreground font-sans">
-      <Header />
       <ScrollToTop />
 
       {/* HERO */}
@@ -43,7 +40,7 @@ export default async function BlogPage() {
           className="pointer-events-none absolute inset-0 opacity-[0.035]"
           style={{
             backgroundImage:
-              "linear-gradient(to right,#D4834A 1px,transparent 1px),linear-gradient(to bottom,#D4834A 1px,transparent 1px)",
+              "linear-gradient(to right,var(--brand) 1px,transparent 1px),linear-gradient(to bottom,var(--brand) 1px,transparent 1px)",
             backgroundSize: "48px 48px",
           }}
         />
@@ -52,14 +49,14 @@ export default async function BlogPage() {
           className="pointer-events-none absolute inset-0"
           style={{
             background:
-              "radial-gradient(ellipse 55% 70% at 80% 50%,rgba(212,131,74,0.06) 0%,transparent 65%)",
+              "radial-gradient(ellipse 55% 70% at 80% 50%,rgba(var(--brand-rgb) / 0.06) 0%,transparent 65%)",
           }}
         />
         <div className="relative z-10 mx-auto max-w-[1280px] px-8">
           <p className="mb-3 type-eyebrow">
             Blog &amp; Resources
           </p>
-          <h1 className="type-h1">
+          <h1 className="type-title-xl">
             Insights, Updates &amp; Industry Know-How
           </h1>
           <p className="mt-6 max-w-2xl type-body">
@@ -77,7 +74,7 @@ export default async function BlogPage() {
           <p className="mb-3 type-eyebrow">
             Ready To Start?
           </p>
-          <h2 className="type-h2">
+          <h2 className="type-title-lg">
             Get a free quote.
           </h2>
           <p className="mx-auto mt-5 max-w-xl type-body">
@@ -86,14 +83,12 @@ export default async function BlogPage() {
           </p>
           <Link
             href="/contact"
-            className="mt-8 inline-block bg-brand px-10 py-4 type-label text-on-brand hover:bg-brand-light"
+            className="mt-8 inline-block bg-brand px-10 py-4 type-micro text-on-brand hover:bg-brand-light"
           >
             Request a Quote
           </Link>
         </div>
       </section>
-
-      <Footer />
     </div>
   );
 }

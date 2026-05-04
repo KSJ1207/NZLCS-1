@@ -20,16 +20,16 @@ const SIZES: Record<Variant, Size> = {
   // Blog body — matches former <p> style.
   default: {
     paragraph: "mb-6 type-body last:mb-0",
-    h2: "mt-10 mb-4 type-h3 text-foreground",
-    h3: "mt-8 mb-3 font-sans text-xl font-bold leading-tight text-foreground",
+    h2: "mt-10 mb-4 type-title-sm text-foreground",
+    h3: "mt-8 mb-3 type-title-xs text-foreground",
     blockquote:
       "my-8 border-l-2 border-brand pl-6 type-body italic text-foreground",
   },
   // Project "About" body — larger.
   large: {
     paragraph: "type-body-lg",
-    h2: "mt-8 mb-4 type-h3 text-foreground",
-    h3: "mt-6 mb-3 font-sans text-xl font-bold leading-tight text-foreground",
+    h2: "mt-8 mb-4 type-title-sm text-foreground",
+    h3: "mt-6 mb-3 type-title-xs text-foreground",
     blockquote:
       "my-6 border-l-2 border-brand pl-6 type-body-lg italic text-foreground",
   },

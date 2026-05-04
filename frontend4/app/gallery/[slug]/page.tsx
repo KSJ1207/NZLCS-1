@@ -2,9 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import Header from "../../components/Header";
 import ScrollToTop from "../../components/ScrollToTop";
-import Footer from "../../components/Footer";
 import PortableText from "../../components/PortableText";
 import { SimpleProjectCard } from "../GalleryList";
 import BeforeAfterSlider from "./BeforeAfterSlider";
@@ -73,7 +71,6 @@ export default async function ProjectPage(
 
   return (
     <div className="min-h-screen w-full bg-background text-foreground font-sans">
-      <Header />
       <ScrollToTop />
 
       {/* HERO */}
@@ -83,7 +80,7 @@ export default async function ProjectPage(
           className="pointer-events-none absolute inset-0 opacity-[0.035]"
           style={{
             backgroundImage:
-              "linear-gradient(to right,#D4834A 1px,transparent 1px),linear-gradient(to bottom,#D4834A 1px,transparent 1px)",
+              "linear-gradient(to right,var(--brand) 1px,transparent 1px),linear-gradient(to bottom,var(--brand) 1px,transparent 1px)",
             backgroundSize: "48px 48px",
           }}
         />
@@ -92,29 +89,29 @@ export default async function ProjectPage(
           className="pointer-events-none absolute inset-0"
           style={{
             background:
-              "radial-gradient(ellipse 55% 70% at 80% 50%,rgba(212,131,74,0.06) 0%,transparent 65%)",
+              "radial-gradient(ellipse 55% 70% at 80% 50%,rgba(var(--brand-rgb) / 0.06) 0%,transparent 65%)",
           }}
         />
         <div className="relative z-10 mx-auto max-w-[1280px] px-8">
           <div className="mb-8 flex flex-wrap items-center gap-2">
-            <span className="bg-brand px-3 py-1.5 type-badge text-on-brand">
+            <span className="bg-brand px-3 py-1.5 type-micro text-on-brand">
               {project.category}
             </span>
-            <span className="border border-border px-3 py-1.5 type-badge text-muted">
+            <span className="border border-border px-3 py-1.5 type-micro text-muted">
               {project.year}
             </span>
-            <span className="border border-border px-3 py-1.5 type-badge text-muted">
+            <span className="border border-border px-3 py-1.5 type-micro text-muted">
               {project.location}
             </span>
           </div>
 
-          <h1 className="max-w-4xl type-h1">
+          <h1 className="max-w-4xl type-title-xl">
             {project.title}
           </h1>
 
           <Link
             href="/gallery"
-            className="mt-8 inline-block type-label text-brand hover:text-brand-dark"
+            className="mt-8 inline-block type-micro text-brand hover:text-brand-dark"
           >
             ← Back to gallery
           </Link>
@@ -128,7 +125,7 @@ export default async function ProjectPage(
             <p className="type-eyebrow">
               Before / After
             </p>
-            <p className="type-label text-muted">
+            <p className="type-micro text-muted">
               Drag ⇄ to compare
             </p>
           </div>
@@ -211,7 +208,7 @@ export default async function ProjectPage(
                     ) : (
                       <div className="absolute inset-3 border border-dashed border-border" />
                     )}
-                    <span className="absolute bottom-4 left-4 bg-background/80 px-2 py-1 type-badge text-foreground">
+                    <span className="absolute bottom-4 left-4 bg-background/80 px-2 py-1 type-micro text-foreground">
                       {photo.label}
                     </span>
                   </div>
@@ -231,13 +228,13 @@ export default async function ProjectPage(
                 <p className="mb-3 type-eyebrow">
                   Related Work
                 </p>
-                <h2 className="type-h2-sm">
+                <h2 className="type-title-md">
                   Similar projects.
                 </h2>
               </div>
               <Link
                 href="/gallery"
-                className="type-label text-brand hover:text-brand-dark"
+                className="type-micro text-brand hover:text-brand-dark"
               >
                 ← Back to Gallery
               </Link>
@@ -259,7 +256,7 @@ export default async function ProjectPage(
           <p className="mb-3 type-eyebrow">
             Have a similar project?
           </p>
-          <h2 className="type-h2">
+          <h2 className="type-title-lg">
             Send us a photo of the job.
           </h2>
           <p className="mx-auto mt-5 max-w-xl type-body">
@@ -268,14 +265,12 @@ export default async function ProjectPage(
           </p>
           <Link
             href="/contact"
-            className="mt-8 inline-block bg-brand px-10 py-4 type-label text-on-brand hover:bg-brand-light"
+            className="mt-8 inline-block bg-brand px-10 py-4 type-micro text-on-brand hover:bg-brand-light"
           >
             Get a Free Quote →
           </Link>
         </div>
       </section>
-
-      <Footer />
     </div>
   );
 }

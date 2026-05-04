@@ -2,9 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import Header from "../../components/Header";
 import ScrollToTop from "../../components/ScrollToTop";
-import Footer from "../../components/Footer";
 import PortableText from "../../components/PortableText";
 import { SimpleBlogCard } from "../BlogList";
 import { client } from "../../../sanity/lib/client";
@@ -72,7 +70,6 @@ export default async function PostPage(props: PageProps<"/blog/[slug]">) {
 
   return (
     <div className="min-h-screen w-full bg-background text-foreground font-sans">
-      <Header />
       <ScrollToTop />
 
       {/* ARTICLE HERO */}
@@ -82,7 +79,7 @@ export default async function PostPage(props: PageProps<"/blog/[slug]">) {
           className="pointer-events-none absolute inset-0 opacity-[0.035]"
           style={{
             backgroundImage:
-              "linear-gradient(to right,#D4834A 1px,transparent 1px),linear-gradient(to bottom,#D4834A 1px,transparent 1px)",
+              "linear-gradient(to right,var(--brand) 1px,transparent 1px),linear-gradient(to bottom,var(--brand) 1px,transparent 1px)",
             backgroundSize: "48px 48px",
           }}
         />
@@ -91,7 +88,7 @@ export default async function PostPage(props: PageProps<"/blog/[slug]">) {
           className="pointer-events-none absolute inset-0"
           style={{
             background:
-              "radial-gradient(ellipse 55% 70% at 80% 0%,rgba(212,131,74,0.06) 0%,transparent 65%)",
+              "radial-gradient(ellipse 55% 70% at 80% 0%,rgba(var(--brand-rgb) / 0.06) 0%,transparent 65%)",
           }}
         />
         <div className="relative z-10 mx-auto max-w-[1280px] px-8">
@@ -100,7 +97,7 @@ export default async function PostPage(props: PageProps<"/blog/[slug]">) {
               <p className="mb-4 type-eyebrow">
                 Blog
               </p>
-              <h1 className="type-h1">
+              <h1 className="type-title-xl">
                 {post.title}
               </h1>
 
@@ -124,7 +121,7 @@ export default async function PostPage(props: PageProps<"/blog/[slug]">) {
                   <dt className="type-eyebrow text-muted">
                     Published
                   </dt>
-                  <dd className="type-form-label text-foreground">
+                  <dd className="type-micro text-foreground">
                     {formatLongDate(post.date)}
                   </dd>
                 </div>
@@ -133,7 +130,7 @@ export default async function PostPage(props: PageProps<"/blog/[slug]">) {
                     <dt className="type-eyebrow text-muted">
                       Author
                     </dt>
-                    <dd className="type-form-label text-foreground">
+                    <dd className="type-micro text-foreground">
                       {post.author}
                     </dd>
                   </div>
@@ -143,7 +140,7 @@ export default async function PostPage(props: PageProps<"/blog/[slug]">) {
                     <dt className="type-eyebrow text-muted">
                       Read Time
                     </dt>
-                    <dd className="type-form-label text-foreground">
+                    <dd className="type-micro text-foreground">
                       {post.readTime}
                     </dd>
                   </div>
@@ -152,7 +149,7 @@ export default async function PostPage(props: PageProps<"/blog/[slug]">) {
 
               <Link
                 href="/blog"
-                className="mt-8 inline-block type-label text-brand hover:text-brand-dark"
+                className="mt-8 inline-block type-micro text-brand hover:text-brand-dark"
               >
                 ← Back to blog
               </Link>
@@ -192,7 +189,7 @@ export default async function PostPage(props: PageProps<"/blog/[slug]">) {
             <p className="mb-3 type-eyebrow">
               Related Articles
             </p>
-            <h2 className="type-h2-sm">
+            <h2 className="type-title-md">
               Keep reading.
             </h2>
           </div>
@@ -212,7 +209,7 @@ export default async function PostPage(props: PageProps<"/blog/[slug]">) {
           <p className="mb-3 type-eyebrow">
             Ready To Start?
           </p>
-          <h2 className="type-h2">
+          <h2 className="type-title-lg">
             Get a free quote.
           </h2>
           <p className="mx-auto mt-5 max-w-xl type-body">
@@ -221,14 +218,12 @@ export default async function PostPage(props: PageProps<"/blog/[slug]">) {
           </p>
           <Link
             href="/contact"
-            className="mt-8 inline-block bg-brand px-10 py-4 type-label text-on-brand hover:bg-brand-light"
+            className="mt-8 inline-block bg-brand px-10 py-4 type-micro text-on-brand hover:bg-brand-light"
           >
             Request a Quote
           </Link>
         </div>
       </section>
-
-      <Footer />
     </div>
   );
 }

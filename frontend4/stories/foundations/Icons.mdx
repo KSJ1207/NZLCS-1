@@ -1,0 +1,124 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+import { SearchableIconGrid, ICONS } from "./IconsGrid";
+
+<Meta title="Foundations/Icons" />
+
+export const SURFACE = {
+  background: "#141311",
+  color: "#EDEBE7",
+  border: "1px solid #3A3733",
+};
+
+export const META = {
+  fontFamily: "ui-monospace, SFMono-Regular, Menlo, monospace",
+  fontSize: "12px",
+  color: "#D8D4CE",
+  lineHeight: 1.6,
+};
+
+export const Hero = () => (
+  <div style={{ ...SURFACE, padding: "3rem 2.5rem", marginTop: "1rem", marginBottom: "2.5rem" }}>
+    <span className="type-eyebrow" style={{ display: "inline-block", marginBottom: "1rem" }}>
+      Foundations
+    </span>
+    <h1 className="type-title-xl" style={{ margin: 0, marginBottom: "1.25rem" }}>
+      Icons
+    </h1>
+    <p className="type-body-lg" style={{ margin: 0, maxWidth: "44rem" }}>
+      The codebase uses <code style={{ ...META, color: "#EDEBE7" }}>lucide-react</code> for
+      every glyph — a permissively-licensed set with consistent stroke width and
+      tidy 24×24 geometry. This page shows every icon currently imported across
+      <code style={{ ...META, color: "#EDEBE7" }}> app/</code>, alphabetically.
+    </p>
+  </div>
+);
+
+<Hero />
+
+## Why lucide
+
+lucide-react ships individual tree-shakeable React components that render
+inline SVG. Three properties make it the right default for this site:
+
+1. **Consistent stroke and proportions.** Every icon is drawn on the same
+   24×24 grid with a 2px stroke by default — they sit together in a row
+   without one feeling heavier than the next.
+2. **Tree-shaken imports.** Only the icons you import are bundled, so the
+   library cost scales with usage, not size.
+3. **Plain SVG props.** `size`, `strokeWidth`, `color`, `className` —
+   nothing to learn. `currentColor` makes them inherit the surrounding
+   text color, which is how the brand-orange tinting works on these cards.
+
+## All icons in use
+
+There are **{ICONS.length} icons** imported across the codebase right now,
+all from `lucide-react`. Filter by name (e.g. `wrench`) or by where they're
+used (e.g. `services`).
+
+<SearchableIconGrid />
+
+---
+
+## How to add an icon
+
+1. Find the icon you want at <a href="https://lucide.dev/icons" target="_blank" rel="noreferrer">lucide.dev/icons</a>.
+   Click it to copy the React import name (PascalCase).
+2. Add it to the import block at the top of the file that needs it:
+
+   ```tsx
+   import { Truck, Wrench, NewIconName } from "lucide-react";
+   ```
+
+3. Render it. The component takes standard SVG-ish props:
+
+   ```tsx
+   <NewIconName size={20} strokeWidth={1.75} className="text-brand" />
+   ```
+
+4. Update `stories/foundations/IconsGrid.tsx` so the new icon appears on
+   this page. Keep the `ICONS` list alphabetical.
+
+### Sizing convention
+
+The codebase uses these sizes consistently — pick one rather than a
+one-off pixel value:
+
+| Size | Where |
+|---|---|
+| `16` | Inline-with-text icons (CTA chevrons, button glyphs) |
+| `20` | Form upload icons, small status indicators |
+| `36` | Standalone feature icons in this page's grid |
+| `48` | Application/Benefit cards on the Services page |
+
+### Color via `currentColor`
+
+Lucide icons inherit color from the parent text color by default. To tint:
+
+```tsx
+{/* Brand orange */}
+<Truck className="text-brand" />
+
+{/* Muted inside a card */}
+<Wrench className="text-muted" />
+
+{/* On a brand background */}
+<Zap className="text-on-brand" />
+```
+
+Don't pass the `color` prop directly (`<Truck color="#D4834A" />`) — that
+bypasses the theme system and won't follow preset swaps.
+
+---
+
+## Don'ts
+
+- ❌ **Don't mix icon libraries.** Stick to lucide-react. Mixing in
+  Heroicons or react-icons breaks the visual rhythm because the stroke
+  weights and grid metrics differ.
+- ❌ **Don't inline raw SVG paths.** If lucide is missing an icon, prefer
+  asking whether a near match (e.g. `Wrench` vs `Settings`) works
+  semantically. If not, add the SVG as a static asset under `public/` and
+  use `<Image>`, not an inline `<svg>`.
+- ❌ **Don't pass arbitrary `size` values.** Use the four sizes in the
+  table above. They cover every existing usage; if you need a fifth,
+  that's worth a design conversation, not a one-off `size={29}`.
