@@ -1,0 +1,412 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Foundations/Typography" />
+
+export const SURFACE = {
+  background: "#141311",
+  color: "#EDEBE7",
+  border: "1px solid #3A3733",
+};
+
+export const META = {
+  fontFamily: "ui-monospace, SFMono-Regular, Menlo, monospace",
+  fontSize: "12px",
+  color: "#D8D4CE",
+  lineHeight: 1.6,
+};
+
+export const Field = ({ name, value }) => (
+  <span>
+    <strong style={{ color: "#EDEBE7", fontWeight: 600 }}>{name}</strong>
+    {"  "}
+    {value}
+  </span>
+);
+
+export const Specimen = ({ children, klass, font, size, weight, lh, tracking, color, use }) => (
+  <div style={{ ...SURFACE, padding: "2.5rem 2rem", marginTop: "0.75rem", marginBottom: "0.5rem" }}>
+    <div style={{ marginBottom: "1.5rem" }}>{children}</div>
+    <div
+      style={{
+        display: "flex",
+        flexWrap: "wrap",
+        gap: "1.25rem 1.75rem",
+        paddingTop: "1.25rem",
+        borderTop: "1px solid #3A3733",
+        ...META,
+      }}
+    >
+      <Field name="class" value={klass} />
+      <Field name="font" value={font} />
+      <Field name="size" value={size} />
+      <Field name="weight" value={weight} />
+      {lh ? <Field name="line-height" value={lh} /> : null}
+      {tracking ? <Field name="tracking" value={tracking} /> : null}
+      {color ? <Field name="color" value={color} /> : null}
+    </div>
+    {use ? (
+      <p
+        style={{
+          fontSize: "13px",
+          color: "#D8D4CE",
+          marginTop: "1rem",
+          marginBottom: 0,
+          maxWidth: "44rem",
+          lineHeight: 1.55,
+        }}
+      >
+        <strong style={{ color: "#EDEBE7", fontWeight: 600 }}>Use for: </strong>
+        {use}
+      </p>
+    ) : null}
+  </div>
+);
+
+export const Hero = () => (
+  <div
+    style={{
+      ...SURFACE,
+      padding: "3rem 2.5rem",
+      marginTop: "1rem",
+      marginBottom: "2.5rem",
+    }}
+  >
+    <span className="type-eyebrow" style={{ display: "inline-block", marginBottom: "1rem" }}>
+      Foundations
+    </span>
+    <h1 className="type-title-xl" style={{ margin: 0, marginBottom: "1.25rem" }}>
+      Typography
+    </h1>
+    <p className="type-body-lg" style={{ margin: 0, maxWidth: "44rem" }}>
+      A size-based type scale built on two typefaces: Josefin Sans for display
+      and UI labels, Nunito Sans for reading text. Class names describe visual
+      size, not HTML semantics — pick the element from the document outline,
+      pick the class from the size you want.
+    </p>
+  </div>
+);
+
+<Hero />
+
+## Naming convention
+
+Class names describe **visual size**, not HTML semantics. `type-title-xl` is
+the largest title regardless of whether it sits inside an `<h1>`, `<h2>`, or a
+plain `<div>`.
+
+- **Pick the HTML element from the document outline** — heading order, semantic
+  meaning, accessibility tree.
+- **Pick the type class from the visual size you want.**
+- The two are independent decisions.
+
+This means an `<h2 className="type-title-xl">` is fine when a sub-page has a
+secondary heading you want to be visually dominant, and an
+`<h1 className="type-title-md">` is fine for a quieter sub-page hero.
+
+The scale has four tiers:
+
+| Tier | Classes | Typeface | Purpose |
+|---|---|---|---|
+| Title | `type-title-xl`, `type-title-lg`, `type-title-md`, `type-title-sm`, `type-title-xs` | Josefin Sans 700 | Display headings |
+| Body | `type-body-lg`, `type-body`, `type-caption` | Nunito Sans 400 | Reading text |
+| Eyebrow | `type-eyebrow` | Josefin Sans 700 | All-caps brand-color label |
+| Micro | `type-micro-lg`, `type-micro` | Josefin Sans 700 | Uppercase tracked UI labels |
+
+---
+
+## The scale
+
+Each style below is rendered using the actual class on real copy from the live
+site. The metadata strip lists exact measurements; the use case describes
+where you'd reach for it.
+
+### Titles
+
+Display headings. The xl, lg, and md sizes are fluid (use `clamp()` to grow
+with the viewport); sm is fixed.
+
+<Specimen
+  klass="type-title-xl"
+  font="Josefin Sans"
+  size="clamp(2.5rem, 6vw, 4rem)  ·  40 → 64px"
+  weight="700"
+  lh="1.05"
+  use="page hero. One per page. Pair with a type-eyebrow above and a type-body-lg paragraph below — see the home page hero or the Services page hero."
+>
+  <h1 className="type-title-xl" style={{ margin: 0 }}>
+    NZ Laser Cleaning Solutions
+  </h1>
+</Specimen>
+
+<Specimen
+  klass="type-title-lg"
+  font="Josefin Sans"
+  size="clamp(2rem, 4vw, 3rem)  ·  32 → 48px"
+  weight="700"
+  lh="1.15"
+  use="section heading on a long page (Services, Why choose us, Request a Quote, Our Office)."
+>
+  <h2 className="type-title-lg" style={{ margin: 0 }}>
+    Industrial Surface Prep
+  </h2>
+</Specimen>
+
+<Specimen
+  klass="type-title-md"
+  font="Josefin Sans"
+  size="clamp(1.75rem, 3vw, 2.25rem)  ·  28 → 36px"
+  weight="700"
+  lh="1.2"
+  use='subsection heading. Used today for "Similar projects." and "Keep reading." blocks at the bottom of blog/gallery detail pages.'
+>
+  <h3 className="type-title-md" style={{ margin: 0 }}>
+    Similar projects.
+  </h3>
+</Specimen>
+
+<Specimen
+  klass="type-title-sm"
+  font="Josefin Sans"
+  size="1.5rem  ·  24px (fixed)"
+  weight="700"
+  lh="1.25"
+  use="card title, sub-section heading inside a long article. Default heading for blog post H2 inside the Sanity body."
+>
+  <h4 className="type-title-sm" style={{ margin: 0 }}>
+    Rust &amp; Oxide Removal
+  </h4>
+</Specimen>
+
+<Specimen
+  klass="type-title-xs"
+  font="Josefin Sans"
+  size="1.25rem  ·  20px (fixed)"
+  weight="700"
+  lh="1.25"
+  use="h3 in body-copy contexts (PortableText). Smallest title in the scale — sits below type-title-sm to give a subtle subsection break inside long-form content."
+>
+  <h5 className="type-title-xs" style={{ margin: 0 }}>
+    Surface preparation
+  </h5>
+</Specimen>
+
+### Body
+
+Reading text. Uses Nunito Sans 400 with generous line-height. All three body styles
+inherit the muted text color (`var(--muted)`) by default — override with
+`text-foreground` for emphasis.
+
+<Specimen
+  klass="type-body-lg"
+  font="Nunito Sans"
+  size="18px  ·  1.125rem"
+  weight="400"
+  lh="2"
+  color="var(--muted)"
+  use='lead paragraphs in long-form content — project "About" body, gallery detail intros. Generous line-height (2) makes long passages comfortable.'
+>
+  <p className="type-body-lg" style={{ margin: 0, maxWidth: "40rem" }}>
+    Our PULSE laser system delivers concentrated light energy directly to the
+    corroded layer. The rust and oxidation absorb the energy and are ablated
+    away, leaving the steel clean and structurally intact.
+  </p>
+</Specimen>
+
+<Specimen
+  klass="type-body"
+  font="Nunito Sans"
+  size="16px  ·  1rem"
+  weight="400"
+  lh="1.75"
+  color="var(--muted)"
+  use="default body text. Service descriptions, hero sub-copy, blog post paragraphs (via PortableText). The workhorse."
+>
+  <p className="type-body" style={{ margin: 0, maxWidth: "40rem" }}>
+    Laser cleaning is an eco-friendly, chemical-free process that removes rust,
+    paint, graffiti, and other contaminants from metal and other surfaces with
+    precision. No abrasives, no solvents — just light.
+  </p>
+</Specimen>
+
+<Specimen
+  klass="type-caption"
+  font="Nunito Sans"
+  size="14px  ·  0.875rem"
+  weight="400"
+  lh="1.6"
+  color="var(--muted)"
+  use="fine print, footer link lists, image captions, form status messages, definition list values."
+>
+  <p className="type-caption" style={{ margin: 0, maxWidth: "40rem" }}>
+    NZ Laser Cleaning Solutions — New Zealand&apos;s eco-friendly laser cleaning
+    specialists. Auckland-based, serving industrial, commercial, and
+    infrastructure projects nationwide.
+  </p>
+</Specimen>
+
+### Eyebrow
+
+A small all-caps brand-color label that introduces a section or title. Sits
+above a `type-title-*` in section and page headers.
+
+<Specimen
+  klass="type-eyebrow"
+  font="Josefin Sans"
+  size="14px  ·  0.875rem"
+  weight="700"
+  tracking="0.22em"
+  color="var(--brand)  ·  #D4834A"
+  use="section eyebrow above a title. Always uppercase. Tight tracking (0.22em) gives it the engineered feel that pairs with the brand orange."
+>
+  <span className="type-eyebrow">Our Services</span>
+</Specimen>
+
+### Micro
+
+Uppercase tracked UI labels — for navigation, buttons, form labels, badges,
+metadata. Two sizes: `type-micro-lg` (14px) for primary nav, `type-micro` (12px)
+for everything else.
+
+<Specimen
+  klass="type-micro-lg"
+  font="Josefin Sans"
+  size="14px  ·  0.875rem"
+  weight="700"
+  tracking="0.18em"
+  use="primary nav (Header), top-level link sets where each link sits between sibling links of similar prominence."
+>
+  <span className="type-micro-lg">Services</span>
+</Specimen>
+
+<Specimen
+  klass="type-micro"
+  font="Josefin Sans"
+  size="12px  ·  0.75rem"
+  weight="700"
+  tracking="0.20em"
+  use='button labels ("Get a Free Quote"), form field labels, footer column headings, badges, photo labels, dataset metadata.'
+>
+  <span className="type-micro">Get a Free Quote</span>
+</Specimen>
+
+---
+
+## When to use what
+
+The type scale is small on purpose — pick the *visual size* you want, then
+pick the HTML element that matches the document outline. Most page-level
+patterns look like one of these:
+
+### Common compositions
+
+- **Page hero** — `type-eyebrow` + `type-title-xl` + `type-body-lg`
+- **Section header** — `type-eyebrow` + `type-title-lg` + `type-body`
+- **Card** — `type-title-sm` + `type-body` + `type-micro` link
+- **Footer / metadata** — `type-micro` heading + `type-caption` items
+- **Form field** — `type-micro` label + input
+- **Badge / chip** — `type-micro` text on a colored background
+
+A live "in context" composition is on the **In Context** sub-story.
+
+### Right vs wrong
+
+The class describes visual size. The element describes the document outline.
+
+✅ **Right** — independent decisions:
+
+```tsx
+// Sub-page hero — visually dominant but second in document order.
+<h1 className="type-title-md">Privacy Policy</h1>
+
+// A bold section title that happens to be an h2.
+<h2 className="type-title-xl">Why choose laser cleaning?</h2>
+```
+
+❌ **Wrong** — using a title size for non-heading content:
+
+```tsx
+// A button label is not a title. Reach for type-micro.
+<div className="type-title-xl">Submit</div>
+```
+
+❌ **Wrong** — using HTML element name in the class name:
+
+```tsx
+// type-h2 is gone. There's no class named after the tag.
+<h2 className="type-h2">Section</h2>
+```
+
+### Default element when using the Typography wrapper
+
+When using the `Typography` component (`app/components/Typography.tsx`),
+each variant has a sensible default tag. Override with `as`:
+
+| Variant | Default element |
+|---|---|
+| `title-xl` | `<h1>` |
+| `title-lg` | `<h2>` |
+| `title-md` | `<h3>` |
+| `title-sm` | `<h4>` |
+| `body-lg`, `body`, `caption` | `<p>` |
+| `eyebrow`, `micro-lg`, `micro` | `<span>` |
+
+```tsx
+// Override the default tag when the outline calls for it:
+<Typography variant="title-md" as="h1">Sub-page Hero</Typography>
+```
+
+---
+
+## Fonts
+
+The system uses two custom-loaded fonts wired up via Next.js `next/font` and
+exposed as CSS variables in `globals.css`.
+
+<div style={{ ...SURFACE, padding: "2rem", marginTop: "1rem" }}>
+  <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between", alignItems: "baseline", gap: "1rem", marginBottom: "1.5rem", paddingBottom: "1.25rem", borderBottom: "1px solid #3A3733" }}>
+    <span style={{ fontFamily: "var(--font-josefin), sans-serif", fontSize: "32px", fontWeight: 700, color: "#EDEBE7" }}>
+      Josefin Sans
+    </span>
+    <span style={{ ...META }}>
+      <Field name="var" value="--font-josefin" />
+    </span>
+  </div>
+  <p style={{ fontFamily: "var(--font-josefin), sans-serif", fontSize: "20px", color: "#EDEBE7", margin: 0, marginBottom: "0.75rem" }}>
+    The quick brown fox jumps over the lazy dog. 0123456789
+  </p>
+  <p style={{ ...META, marginTop: "1rem", marginBottom: 0 }}>
+    Used in: titles · eyebrow · micro · micro-lg · the body element default
+    (set in <code>body {`{`} font-family: var(--font-josefin) {`}`}</code>).
+    {" "}Weights loaded: 400, 500, 700.
+  </p>
+</div>
+
+<div style={{ ...SURFACE, padding: "2rem", marginTop: "0.75rem" }}>
+  <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between", alignItems: "baseline", gap: "1rem", marginBottom: "1.5rem", paddingBottom: "1.25rem", borderBottom: "1px solid #3A3733" }}>
+    <span style={{ fontFamily: "var(--font-body), -apple-system, BlinkMacSystemFont, \"Segoe UI\", system-ui, sans-serif", fontSize: "32px", fontWeight: 400, color: "#EDEBE7" }}>
+      Nunito Sans
+    </span>
+    <span style={{ ...META }}>
+      <Field name="var" value="--font-body" />
+    </span>
+  </div>
+  <p style={{ fontFamily: "var(--font-body), -apple-system, BlinkMacSystemFont, \"Segoe UI\", system-ui, sans-serif", fontSize: "20px", color: "#EDEBE7", margin: 0, marginBottom: "0.75rem" }}>
+    The quick brown fox jumps over the lazy dog. 0123456789
+  </p>
+  <p style={{ ...META, marginTop: "1rem", marginBottom: 0 }}>
+    Used in: body-lg · body · caption. Weights loaded: 300, 400, 600. Falls
+    back to -apple-system, BlinkMacSystemFont, system-ui sans-serif if Nunito
+    Sans is unavailable.
+  </p>
+</div>
+
+---
+
+## See also
+
+- **In Context** — a realistic page section showing the scale used together.
+- **Titles · Body · Micro** — individual variant stories with controls and
+  background switching.
+- **Typography Migration** — temporary reference mapping old class names
+  (`type-h1`, `type-body-sm`, `type-label`, …) to the new scale. To be
+  deleted on **2026-05-31**.

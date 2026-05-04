@@ -1,0 +1,310 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Foundations/Colors" />
+
+export const SURFACE = {
+  background: "#141311",
+  color: "#EDEBE7",
+  border: "1px solid #3A3733",
+};
+
+export const META = {
+  fontFamily: "ui-monospace, SFMono-Regular, Menlo, monospace",
+  fontSize: "12px",
+  color: "#D8D4CE",
+  lineHeight: 1.6,
+};
+
+export const Field = ({ name, value }) => (
+  <span>
+    <strong style={{ color: "#EDEBE7", fontWeight: 600 }}>{name}</strong>
+    {"  "}
+    {value}
+  </span>
+);
+
+export const Swatch = ({ varName, hex, tw, use }) => (
+  <div style={{ ...SURFACE, padding: 0, display: "flex", flexDirection: "column" }}>
+    <div
+      style={{
+        background: hex,
+        height: "112px",
+        borderBottom: "1px solid #3A3733",
+      }}
+    />
+    <div style={{ padding: "1rem 1.1rem 1.1rem", flex: 1, display: "flex", flexDirection: "column", gap: "0.6rem" }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", gap: "0.5rem", flexWrap: "wrap" }}>
+        <code style={{ ...META, color: "#EDEBE7", fontWeight: 600, fontSize: "13px" }}>--{varName}</code>
+        <code style={{ ...META }}>{hex}</code>
+      </div>
+      <div style={{ ...META }}>
+        <Field name="tw" value={tw} />
+      </div>
+      <p style={{ fontSize: "13px", color: "#D8D4CE", margin: 0, lineHeight: 1.5 }}>
+        {use}
+      </p>
+    </div>
+  </div>
+);
+
+export const Grid = ({ children }) => (
+  <div
+    style={{
+      display: "grid",
+      gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))",
+      gap: "1rem",
+      marginTop: "0.75rem",
+    }}
+  >
+    {children}
+  </div>
+);
+
+export const PresetCard = ({ name, label, palette }) => (
+  <div style={{ ...SURFACE, padding: 0 }}>
+    <div style={{ display: "flex", height: "60px" }}>
+      {Object.entries(palette).map(([k, v]) => (
+        <div key={k} title={`--${k}: ${v}`} style={{ flex: 1, background: v }} />
+      ))}
+    </div>
+    <div style={{ padding: "1rem 1.1rem" }}>
+      <div style={{ ...META, color: "#EDEBE7", fontWeight: 600, fontSize: "13px", marginBottom: "0.4rem" }}>
+        {name}
+      </div>
+      <p style={{ fontSize: "13px", color: "#D8D4CE", margin: 0, lineHeight: 1.5 }}>{label}</p>
+    </div>
+  </div>
+);
+
+export const Hero = () => (
+  <div style={{ ...SURFACE, padding: "3rem 2.5rem", marginTop: "1rem", marginBottom: "2.5rem" }}>
+    <span className="type-eyebrow" style={{ display: "inline-block", marginBottom: "1rem" }}>
+      Foundations
+    </span>
+    <h1 className="type-title-xl" style={{ margin: 0, marginBottom: "1.25rem" }}>
+      Colors
+    </h1>
+    <p className="type-body-lg" style={{ margin: 0, maxWidth: "44rem" }}>
+      Eleven semantic color tokens, set in <code style={{ ...META, color: "#EDEBE7" }}>:root</code> and
+      exposed to Tailwind via <code style={{ ...META, color: "#EDEBE7" }}>@theme inline</code>. Three
+      preset palettes are kept in the file for client review — swap one into
+      <code style={{ ...META, color: "#EDEBE7" }}> :root</code> to repaint the entire site.
+    </p>
+  </div>
+);
+
+<Hero />
+
+## How colors are wired up
+
+`globals.css` defines color values as CSS custom properties on `:root`,
+then the `@theme inline` block re-exports them with the `--color-` prefix
+that Tailwind v4 reads to generate utility classes:
+
+```css
+:root {
+  --brand: #D4834A;
+}
+
+@theme inline {
+  --color-brand: var(--brand);   /* generates bg-brand, text-brand, border-brand */
+}
+```
+
+That double layer means **the source of truth is always the bare variable
+name** (`--brand`), and **Tailwind classes are derived** (`bg-brand`,
+`text-brand`, `border-brand`). To repaint the site for a client review,
+swap the `:root` block — never edit the `@theme inline` block.
+
+The token vocabulary is intentionally small (11 colors, no per-component
+shades). If you need a tint or shade in one place, reach for an opacity
+modifier (`bg-brand/10`, `text-foreground/70`) instead of adding a new token.
+
+---
+
+## Surface
+
+The neutrals that build pages: page background, raised surface, foreground
+text, muted secondary text, and the divider color.
+
+<Grid>
+  <Swatch
+    varName="background"
+    hex="#141311"
+    tw="bg-background, text-background, border-background"
+    use="page background. Default body color via the body { background } rule. Used as the dark canvas everywhere."
+  />
+  <Swatch
+    varName="surface"
+    hex="#1E1D1A"
+    tw="bg-surface, text-surface"
+    use="raised surfaces — form inputs, brand-logo cards in the partners strip, accordion answer panels."
+  />
+  <Swatch
+    varName="foreground"
+    hex="#EDEBE7"
+    tw="bg-foreground, text-foreground, border-foreground"
+    use="primary text color on dark backgrounds. Set on body. Apply with text-foreground when overriding a muted parent."
+  />
+  <Swatch
+    varName="muted"
+    hex="#D8D4CE"
+    tw="bg-muted, text-muted, border-muted"
+    use="secondary text — body copy, captions, eyebrow labels in light areas. Inherited by type-body, type-body-lg, type-caption."
+  />
+  <Swatch
+    varName="border"
+    hex="#3A3733"
+    tw="bg-border, border-border"
+    use="hairlines and dividers — section separators, card outlines, table cell borders. The 1px line that holds the layout together."
+  />
+</Grid>
+
+---
+
+## Brand
+
+The orange family. `--brand` is the headline color used for eyebrow labels,
+links, and primary CTAs. Light/dark variants are reserved for hover states
+and emphasis.
+
+<Grid>
+  <Swatch
+    varName="brand"
+    hex="#D4834A"
+    tw="bg-brand, text-brand, border-brand"
+    use="primary brand orange. Eyebrow text color, primary buttons, link color, badges. The single hue that says NZLCS."
+  />
+  <Swatch
+    varName="brand-light"
+    hex="#E8A672"
+    tw="bg-brand-light, text-brand-light, border-brand-light"
+    use="hover state for brand elements (buttons, links). Slightly warmer/lighter to read as interactive."
+  />
+  <Swatch
+    varName="brand-dark"
+    hex="#a85f28"
+    tw="bg-brand-dark, text-brand-dark, border-brand-dark"
+    use="hover state for inline links on neutral backgrounds (text-brand → text-brand-dark)."
+  />
+  <Swatch
+    varName="on-brand"
+    hex="#141311"
+    tw="bg-on-brand, text-on-brand"
+    use='foreground color when sitting ON top of brand orange — e.g. "Get a Free Quote" button text. Same value as --background for contrast.'
+  />
+</Grid>
+
+---
+
+## Semantic
+
+Two extras for specific roles outside the brand/surface system.
+
+<Grid>
+  <Swatch
+    varName="secondary"
+    hex="#EDEBE7"
+    tw="bg-secondary, text-secondary, border-secondary"
+    use="alternate emphasis color (currently equal to --foreground in the dark preset, but kept separate so other presets can diverge)."
+  />
+  <Swatch
+    varName="accent"
+    hex="#7FA882"
+    tw="bg-accent, text-accent, border-accent"
+    use='affirmative/success accent — used for the form upload button, "Sent" form status, and other positive UI cues. Kept distinct from brand so an OK/error split is visible.'
+  />
+</Grid>
+
+---
+
+## Theme presets
+
+Three palettes live in `globals.css` — only Preset A (Dark Mode) is currently
+active. The others are commented out, ready to swap into `:root` for a
+client review without touching any component.
+
+<Grid>
+  <PresetCard
+    name="Preset A — Dark Mode (active)"
+    label="Brand guideline. Charcoal canvas, warm beige text, orange brand. The current production look."
+    palette={{
+      background: "#141311",
+      surface: "#1E1D1A",
+      foreground: "#EDEBE7",
+      muted: "#D8D4CE",
+      brand: "#D4834A",
+      "brand-light": "#E8A672",
+      accent: "#7FA882",
+    }}
+  />
+  <PresetCard
+    name="Preset B — Warm Brown"
+    label="Previous palette. Espresso background, cream text, deeper terracotta brand. More moody than the active preset."
+    palette={{
+      background: "#2b1810",
+      surface: "#371e13",
+      foreground: "#f4e9d6",
+      muted: "#b8a690",
+      brand: "#b25d1f",
+      "brand-light": "#d4824a",
+      accent: "#b25d1f",
+    }}
+  />
+  <PresetCard
+    name="Preset C — Light Industrial"
+    label="Untested for accessibility. Off-white canvas, near-black text, terracotta brand. Bring up only after running contrast checks on body and muted text."
+    palette={{
+      background: "#faf8f4",
+      surface: "#ffffff",
+      foreground: "#1a1a1a",
+      muted: "#6b6b6b",
+      brand: "#b25d1f",
+      "brand-light": "#d4824a",
+      accent: "#5a8a5e",
+    }}
+  />
+</Grid>
+
+### How to swap a preset
+
+In `app/globals.css`, the active preset sits inside `:root`. The other two
+are kept as commented-out blocks directly below. To switch:
+
+1. Comment out the current `:root { ... }` block.
+2. Uncomment the preset you want to try.
+3. Reload — every component re-paints, no other code changes needed.
+
+```css
+/* Active */
+:root {
+  --background: #141311;
+  /* ...rest of Preset A... */
+}
+
+/* Inactive — uncomment to try */
+/*
+:root {
+  --background: #faf8f4;
+  ...
+}
+*/
+```
+
+Don't define new color tokens during a preset experiment — if a preset
+needs a color the others don't have, the system breaks. Stick to the 11
+shared tokens.
+
+---
+
+## Don'ts
+
+- ❌ **Don't add hex values directly in components.** Every color in the
+  app should resolve through a CSS variable. Hex literals in className
+  arbitrary values (`bg-[#ff0000]`) bypass the preset system.
+- ❌ **Don't introduce new color tokens unilaterally.** If you need a new
+  shade, first ask whether opacity modifiers (`bg-brand/10`,
+  `text-foreground/70`) cover the case. They usually do.
+- ❌ **Don't assume `--secondary` and `--foreground` are the same.** They
+  match in Preset A but diverge in B and C. Always pick the token that
+  describes intent.

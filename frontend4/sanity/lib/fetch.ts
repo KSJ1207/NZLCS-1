@@ -8,7 +8,8 @@ import { readToken } from "../env";
  *
  * - Default: published-only via the CDN, ISR with `revalidate: 60` and route-level tags
  *   so a Sanity webhook can later call `revalidateTag(tag)` for instant updates.
- * - Draft mode: bypass cache, fetch drafts with the read token.
+ * - Draft mode: bypass cache, fetch drafts with the read token, enable stega so the
+ *   Visual Editing overlay can map text in the rendered page back to its source field.
  *
  * Tags are conventional: 'post' for any post change, `post:<slug>` for a specific one,
  * same for 'project'. Configure your Sanity GROQ-powered webhook to send these.
@@ -37,7 +38,7 @@ export async function sanityFetch<T>({
         token: readToken,
         useCdn: false,
         perspective: "previewDrafts",
-        stega: false,
+        stega: { enabled: true, studioUrl: "/studio" },
       })
       .fetch<T>(query, params, {
         cache: "no-store",

@@ -8,7 +8,8 @@ import { parseBody } from "next-sanity/webhook";
  * Wire this up AFTER deploying:
  *   1. Sanity Manage → API → Webhooks → Create.
  *   2. URL: https://<your-host>/api/revalidate
- *   3. Trigger: Create / Update / Delete on documents matching `_type in ["post", "project"]`.
+ *   3. Trigger: Create / Update / Delete on documents matching
+ *      `_type in ["post", "project", "siteSettings", "navigation", "homePage", "page", "service", "testimonial", "faq"]`.
  *   4. Projection:
  *        {
  *          "_type": _type,
@@ -19,11 +20,27 @@ import { parseBody } from "next-sanity/webhook";
  * On each publish/unpublish, Sanity POSTs the projection signed with the secret. We verify
  * the signature, then revalidate the broad-type tag (e.g. 'post') so list pages refresh,
  * and the specific tag (e.g. 'post:<slug>') so the detail page refreshes.
+ *
+ * siteSettings / navigation also bust the global 'layout' tag so every page picks up the change.
  */
+type ContentType =
+  | "post"
+  | "project"
+  | "siteSettings"
+  | "navigation"
+  | "homePage"
+  | "page"
+  | "service"
+  | "testimonial"
+  | "faq";
+
 type Payload = {
-  _type?: "post" | "project";
+  _type?: ContentType;
   slug?: string;
 };
+
+// Types whose content appears on every page (because the layout fetches them).
+const LAYOUT_TYPES: ReadonlySet<ContentType> = new Set(["siteSettings", "navigation"]);
 
 export async function POST(req: NextRequest) {
   const secret = process.env.SANITY_REVALIDATE_SECRET;
@@ -47,6 +64,9 @@ export async function POST(req: NextRequest) {
   revalidateTag(body._type, "max");
   if (body.slug) {
     revalidateTag(`${body._type}:${body.slug}`, "max");
+  }
+  if (LAYOUT_TYPES.has(body._type)) {
+    revalidateTag("layout", "max");
   }
 
   return Response.json({ revalidated: true, type: body._type, slug: body.slug });

@@ -59,11 +59,11 @@ export default function BeforeAfterSlider({ before, after }: Props) {
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{
-          backgroundColor: "#3a2418",
+          backgroundColor: "var(--surface-rust)",
           backgroundImage: before ? `url(${before})` : undefined,
         }}
       >
-        <span className="absolute left-4 top-4 bg-background/70 px-2 py-1 type-badge text-foreground">
+        <span className="absolute left-4 top-4 bg-background/70 px-2 py-1 type-micro text-foreground">
           Before
         </span>
       </div>
@@ -79,14 +79,14 @@ export default function BeforeAfterSlider({ before, after }: Props) {
             backgroundImage: after ? `url(${after})` : undefined,
           }}
         />
-        <span className="absolute right-4 top-4 bg-background/70 px-2 py-1 type-badge text-foreground">
+        <span className="absolute right-4 top-4 bg-background/70 px-2 py-1 type-micro text-foreground">
           After
         </span>
       </div>
 
       {!before && !after && (
-        <span className="absolute bottom-4 right-4 bg-background/70 px-2 py-1 type-badge text-muted">
-          // Photo to be provided
+        <span className="absolute bottom-4 right-4 bg-background/70 px-2 py-1 type-micro text-muted">
+          {"// Photo to be provided"}
         </span>
       )}
 

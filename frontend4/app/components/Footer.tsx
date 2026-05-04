@@ -1,102 +1,138 @@
 import Image from "next/image";
 import Link from "next/link";
+import type { Navigation, SiteSettings } from "../../sanity/lib/types";
+import { ctaHref, ctaRel, ctaTarget } from "../../sanity/lib/links";
 
 const LOGO_SRC = "/logo-symbol-inverted.png";
 
-export default function Footer() {
+type FooterProps = {
+  siteSettings: SiteSettings | null;
+  navigation: Navigation | null;
+};
+
+function formatAddress(addr: SiteSettings["address"]): string | null {
+  if (!addr) return null;
+  const parts = [addr.suburb, addr.city, addr.region].filter(Boolean);
+  return parts.length ? parts.join(", ") : null;
+}
+
+function resolveLegalLine(line: string | null | undefined): string {
+  const fallback = `© ${new Date().getFullYear()} NZLCS. All rights reserved.`;
+  if (!line) return fallback;
+  return line.replace(/\{year\}/g, String(new Date().getFullYear()));
+}
+
+export default function Footer({ siteSettings, navigation }: FooterProps) {
+  const tagline = siteSettings?.footerTagline;
+  const phone = siteSettings?.phone;
+  const primaryEmail = siteSettings?.primaryEmail;
+  const secondaryEmail = siteSettings?.secondaryEmail;
+  const addressLine = formatAddress(siteSettings?.address ?? null);
+  const columns = navigation?.footerColumns ?? [];
+  const socials = siteSettings?.socials ?? [];
+  const legal = resolveLegalLine(siteSettings?.legalLine);
+  const privacyUrl = siteSettings?.privacyUrl;
+  const termsUrl = siteSettings?.termsUrl;
+  const businessName = siteSettings?.businessName ?? "NZLCS";
+
   return (
     <footer className="border-t border-border">
       <div className="mx-auto grid max-w-[1280px] grid-cols-2 gap-10 px-8 py-20 md:grid-cols-4">
         <div>
           <Image
             src={LOGO_SRC}
-            alt="NZLCS"
+            alt={businessName}
             width={96}
             height={96}
             className="h-24 w-auto"
           />
-          <p className="mt-4 type-caption">
-            NZ Laser Cleaning Solutions — New Zealand&apos;s eco-friendly
-            laser cleaning specialists.
-          </p>
+          {tagline && <p className="mt-4 type-caption">{tagline}</p>}
         </div>
-        <div>
-          <h5 className="mb-4 type-label">
-            Services
-          </h5>
-          <ul className="space-y-2 type-caption">
-            <li><Link href="/services#rust-oxide-removal" className="hover:text-brand-light transition-colors">Rust Removal</Link></li>
-            <li><Link href="/services#vehicle-rust-removal" className="hover:text-brand-light transition-colors">Vehicle Body Prep</Link></li>
-            <li><Link href="/services#industrial-surface-prep" className="hover:text-brand-light transition-colors">Industrial Prep</Link></li>
-          </ul>
-        </div>
-        <div>
-          <h5 className="mb-4 type-label">
-            Company
-          </h5>
-          <ul className="space-y-2 type-caption">
-            <li><Link href="/about" className="hover:text-brand-light transition-colors">About Us</Link></li>
-            <li><Link href="/gallery" className="hover:text-brand-light transition-colors">Gallery</Link></li>
-            <li><Link href="/blog" className="hover:text-brand-light transition-colors">Blog</Link></li>
-            <li><Link href="/contact" className="hover:text-brand-light transition-colors">Contact</Link></li>
-          </ul>
-        </div>
-        <div>
-          <h5 className="mb-4 type-label">
-            Contact
-          </h5>
-          <ul className="space-y-2 type-caption">
-            <li>
-              <a
-                href="https://www.google.com/maps?q=Auckland,New+Zealand"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-brand-light transition-colors"
-              >
-                Auckland, New Zealand
-              </a>
-            </li>
-            <li>
-              <a href="mailto:info@nzlcs.com" className="hover:text-brand-light transition-colors">
-                info@nzlcs.com
-              </a>
-            </li>
-            <li>
-              <a href="mailto:dan@nzlcs.com" className="hover:text-brand-light transition-colors">
-                dan@nzlcs.com
-              </a>
-            </li>
-            <li>
-              <a href="tel:+64214199933" className="hover:text-brand-light transition-colors">
-                021 419 933
-              </a>
-            </li>
-          </ul>
-          <div className="mt-4 flex gap-3">
-            <a
-              href="#"
-              aria-label="Facebook"
-              className="flex h-8 w-8 items-center justify-center border border-border text-foreground hover:bg-brand hover:text-on-brand hover:border-brand"
-            >
-              <span className="text-xs font-bold">f</span>
-            </a>
-            <a
-              href="#"
-              aria-label="Instagram"
-              className="flex h-8 w-8 items-center justify-center border border-border text-foreground hover:bg-brand hover:text-on-brand hover:border-brand"
-            >
-              <span className="text-xs font-bold">IG</span>
-            </a>
+        {columns.map((col, ci) => (
+          <div key={`${col.columnTitle}-${ci}`}>
+            <h5 className="mb-4 type-micro">{col.columnTitle}</h5>
+            <ul className="space-y-2 type-caption">
+              {col.links.map((cta, li) => (
+                <li key={`${cta.label}-${li}`}>
+                  <Link
+                    href={ctaHref(cta)}
+                    target={ctaTarget(cta)}
+                    rel={ctaRel(cta)}
+                    className="hover:text-brand-light transition-colors"
+                  >
+                    {cta.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
+        ))}
+        <div>
+          <h5 className="mb-4 type-micro">Contact</h5>
+          <ul className="space-y-2 type-caption">
+            {addressLine && (
+              <li>
+                <a
+                  href={`https://www.google.com/maps?q=${encodeURIComponent(addressLine)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-brand-light transition-colors"
+                >
+                  {addressLine}
+                </a>
+              </li>
+            )}
+            {primaryEmail && (
+              <li>
+                <a href={`mailto:${primaryEmail}`} className="hover:text-brand-light transition-colors">
+                  {primaryEmail}
+                </a>
+              </li>
+            )}
+            {secondaryEmail && (
+              <li>
+                <a href={`mailto:${secondaryEmail}`} className="hover:text-brand-light transition-colors">
+                  {secondaryEmail}
+                </a>
+              </li>
+            )}
+            {phone && (
+              <li>
+                <a href={`tel:${phone.replace(/\s+/g, "")}`} className="hover:text-brand-light transition-colors">
+                  {phone}
+                </a>
+              </li>
+            )}
+          </ul>
+          {socials.length > 0 && (
+            <div className="mt-4 flex gap-3">
+              {socials.map((s) => (
+                <a
+                  key={s.platform}
+                  href={s.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={s.platform}
+                  className="flex h-8 w-8 items-center justify-center border border-border text-foreground hover:bg-brand hover:text-on-brand hover:border-brand"
+                >
+                  <span className="text-xs font-bold uppercase">
+                    {s.platform === "facebook" ? "f" : s.platform.slice(0, 2)}
+                  </span>
+                </a>
+              ))}
+            </div>
+          )}
         </div>
       </div>
       <div className="bg-brand text-on-brand">
-        <div className="mx-auto flex max-w-[1280px] flex-col items-center justify-between gap-2 px-8 py-4 type-label md:flex-row">
-          <span>© {new Date().getFullYear()} NZLCS. All rights reserved.</span>
-          <div className="flex gap-6">
-            <a href="#">Privacy</a>
-            <a href="#">Terms</a>
-          </div>
+        <div className="mx-auto flex max-w-[1280px] flex-col items-center justify-between gap-2 px-8 py-4 type-micro md:flex-row">
+          <span>{legal}</span>
+          {(privacyUrl || termsUrl) && (
+            <div className="flex gap-6">
+              {privacyUrl && <a href={privacyUrl}>Privacy</a>}
+              {termsUrl && <a href={termsUrl}>Terms</a>}
+            </div>
+          )}
         </div>
       </div>
     </footer>

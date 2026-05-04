@@ -7,12 +7,16 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "seed-content": "tsx scripts/seed-content.ts",
+    "import-content": "tsx scripts/import-content.ts",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "chmod -R u+w storybook-static 2>/dev/null; rm -rf storybook-static && storybook build"
   },
   "dependencies": {
+    "@sanity/icons": "^3.7.4",
     "@sanity/image-url": "^2.1.1",
     "@sanity/vision": "^5.22.0",
+    "@sanity/visual-editing": "^5.3.4",
     "lucide-react": "^1.11.0",
     "next": "16.2.3",
     "next-sanity": "^12.3.0",
@@ -21,26 +25,26 @@
     "resend": "^6.12.2"
   },
   "devDependencies": {
+    "@chromatic-com/storybook": "^5.1.2",
+    "@storybook/addon-a11y": "^10.3.5",
+    "@storybook/addon-docs": "^10.3.5",
+    "@storybook/addon-onboarding": "^10.3.5",
+    "@storybook/addon-vitest": "^10.3.5",
+    "@storybook/nextjs-vite": "^10.3.5",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@vitest/browser-playwright": "^4.1.5",
+    "@vitest/coverage-v8": "^4.1.5",
     "eslint": "^9",
     "eslint-config-next": "16.2.3",
+    "eslint-plugin-storybook": "^10.3.5",
+    "playwright": "^1.59.1",
+    "storybook": "^10.3.5",
     "tailwindcss": "^4",
     "typescript": "^5",
-    "storybook": "^10.3.5",
-    "@storybook/nextjs-vite": "^10.3.5",
-    "@chromatic-com/storybook": "^5.1.2",
-    "@storybook/addon-vitest": "^10.3.5",
-    "@storybook/addon-a11y": "^10.3.5",
-    "@storybook/addon-docs": "^10.3.5",
-    "@storybook/addon-onboarding": "^10.3.5",
     "vite": "^8.0.10",
-    "eslint-plugin-storybook": "^10.3.5",
-    "vitest": "^4.1.5",
-    "playwright": "^1.59.1",
-    "@vitest/browser-playwright": "^4.1.5",
-    "@vitest/coverage-v8": "^4.1.5"
+    "vitest": "^4.1.5"
   }
 }

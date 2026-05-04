@@ -53,7 +53,7 @@ export default function BlogList({
         <div className="mx-auto max-w-[1280px] px-8 py-12">
           {visible.length === 0 ? (
             <div className="py-24 text-center">
-              <p className="type-body-sm">
+              <p className="type-body">
                 No posts in this category yet.
               </p>
             </div>
@@ -88,13 +88,13 @@ export function BlogCard({ post }: { post: PostCard }) {
             </span>
           ) : null}
         </div>
-        <h3 className="type-h3 group-hover:text-brand">
+        <h3 className="type-title-sm group-hover:text-brand">
           {post.title}
         </h3>
-        <p className="mt-3 flex-1 type-body-sm">
+        <p className="mt-3 flex-1 type-body">
           {post.excerpt}
         </p>
-        <span className="mt-6 inline-block type-label text-foreground underline underline-offset-4 group-hover:text-brand">
+        <span className="mt-6 inline-block type-micro text-foreground underline underline-offset-4 group-hover:text-brand">
           Read article →
         </span>
       </div>
@@ -160,7 +160,7 @@ export function SimpleBlogCard({ post }: { post: PostCard }) {
           </>
         ) : null}
       </div>
-      <h3 className="type-h3 group-hover:text-brand">
+      <h3 className="type-title-sm group-hover:text-brand">
         {post.title}
       </h3>
     </Link>

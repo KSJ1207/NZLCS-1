@@ -10,10 +10,12 @@
 :root {
   --background: #141311;
   --surface: #1E1D1A;
+  --surface-rust: #3a2418;
   --foreground: #EDEBE7;
-  --muted: #C8C4BE;
+  --muted: #D8D4CE;
   --border: #3A3733;
   --brand: #D4834A;
+  --brand-rgb: 212 131 74;
   --brand-light: #E8A672;
   --brand-dark: #a85f28;
   --secondary: #EDEBE7;
@@ -22,6 +24,7 @@
 }
 
 /* ---------- PRESET B — Warm Brown (previous) ----------
+   Activating? Also add --brand-rgb (decimal of --brand) and --surface-rust below.
 :root {
   --background: #2b1810;
   --surface: #371e13;
@@ -38,6 +41,7 @@
 */
 
 /* ---------- PRESET C — Light Industrial ----------
+   Activating? Also add --brand-rgb (decimal of --brand) and --surface-rust below.
 :root {
   --background: #faf8f4;
   --surface: #ffffff;
@@ -65,8 +69,9 @@
   --color-secondary: var(--secondary);
   --color-accent: var(--accent);
   --color-on-brand: var(--on-brand);
+  --color-surface-rust: var(--surface-rust);
   --font-sans: var(--font-josefin);
-  --font-body: var(--font-lato);
+  --font-body: var(--font-body);
 }
 
 body {
@@ -78,138 +83,110 @@ body {
 
 /* =========================================================================
    TYPOGRAPHY SCALE
-   Single source of truth for all text styles.
-   Use these classes across the app — change here, changes everywhere.
+   Size-based naming. HTML element choice is independent of class choice:
+   pick the element from the document outline, pick the class from the
+   visual size you want.
+
+   Tiers:
+     type-title-{xl,lg,md,sm,xs}   display headings (josefin)
+     type-body-lg / body / caption   reading text (nunito)
+     type-eyebrow               small all-caps brand-color label
+     type-micro-lg / type-micro uppercase tracked UI labels
    ========================================================================= */
 @layer components {
-  /* Eyebrow — small all-caps label above headings */
+  /* Eyebrow — small all-caps brand-color label above titles or sections */
   .type-eyebrow {
     font-family: var(--font-josefin), sans-serif;
-    font-size: 11px;
+    font-size: 14px;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.22em;
     color: var(--brand);
   }
 
-  /* Page-level hero heading */
-  .type-h1 {
+  /* Title XL — page-level hero heading */
+  .type-title-xl {
     font-family: var(--font-josefin), sans-serif;
     font-size: clamp(2.5rem, 6vw, 4rem);
     font-weight: 700;
     line-height: 1.05;
   }
 
-  /* Section heading */
-  .type-h2 {
+  /* Title LG — section heading */
+  .type-title-lg {
     font-family: var(--font-josefin), sans-serif;
     font-size: clamp(2rem, 4vw, 3rem);
     font-weight: 700;
     line-height: 1.15;
   }
 
-  /* Card / sub-section heading */
-  .type-h3 {
-    font-family: var(--font-josefin), sans-serif;
-    font-size: 1.5rem;
-    font-weight: 700;
-    line-height: 1.25;
-  }
-
-  /* Body — main readable paragraph text, uses Lato */
-  .type-body {
-    font-family: var(--font-lato), Georgia, serif;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 1.75;
-    color: var(--muted);
-  }
-
-  /* Body small — captions, card descriptions */
-  .type-body-sm {
-    font-family: var(--font-lato), Georgia, serif;
-    font-size: 15px;
-    font-weight: 400;
-    line-height: 1.7;
-    color: var(--muted);
-  }
-
-  /* Caption — fine print, footer lists */
-  .type-caption {
-    font-family: var(--font-lato), Georgia, serif;
-    font-size: 13px;
-    font-weight: 400;
-    line-height: 1.6;
-    color: var(--muted);
-  }
-
-  /* Nav / label — uppercase spaced UI text */
-  .type-label {
-    font-family: var(--font-josefin), sans-serif;
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
-  }
-
-  /* Logo wordmark — brand text beside the logo mark */
-  .type-logo {
-    font-family: var(--font-josefin), sans-serif;
-    font-size: 18px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-  }
-
-  /* Nav links — header navigation and similar UI links */
-  .type-nav {
-    font-family: var(--font-josefin), sans-serif;
-    font-size: 13px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.18em;
-  }
-
-  /* Form label / metadata / stat sublabel — condensed tracking variant */
-  .type-form-label {
-    font-family: var(--font-josefin), sans-serif;
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.18em;
-  }
-
-  /* Badge — tiny chip text, number badges, photo labels */
-  .type-badge {
-    font-family: var(--font-josefin), sans-serif;
-    font-size: 10px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.22em;
-  }
-
-  /* Stat number — large display numbers in the stats strip */
-  .type-stat {
-    font-family: var(--font-josefin), sans-serif;
-    font-size: clamp(2.25rem, 4vw, 3rem);
-    font-weight: 700;
-    color: var(--brand);
-  }
-
-  /* Heading small — subsection heads like "Keep reading." / "Similar projects." */
-  .type-h2-sm {
+  /* Title MD — subsection heading (responsive, e.g. "Similar projects.") */
+  .type-title-md {
     font-family: var(--font-josefin), sans-serif;
     font-size: clamp(1.75rem, 3vw, 2.25rem);
     font-weight: 700;
     line-height: 1.2;
   }
 
-  /* Body large — prominent project/about descriptions */
+  /* Title SM — card / sub-section heading (fixed) */
+  .type-title-sm {
+    font-family: var(--font-josefin), sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.25;
+  }
+
+  /* Title XS — h3 in body-copy contexts (PortableText), small subsection heading */
+  .type-title-xs {
+    font-family: var(--font-josefin), sans-serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1.25;
+  }
+
+  /* Body LG — prominent project/about descriptions */
   .type-body-lg {
-    font-family: var(--font-lato), Georgia, serif;
+    font-family: var(--font-body), -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
     font-size: 18px;
     font-weight: 400;
     line-height: 2;
     color: var(--muted);
   }
+
+  /* Body — main readable paragraph text */
+  .type-body {
+    font-family: var(--font-body), -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.75;
+    color: var(--muted);
+  }
+
+  /* Caption — fine print, footer lists, image captions */
+  .type-caption {
+    font-family: var(--font-body), -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.6;
+    color: var(--muted);
+  }
+
+  /* Micro LG — larger uppercase tracked label (nav, headers) */
+  .type-micro-lg {
+    font-family: var(--font-josefin), sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+  }
+
+  /* Micro — default uppercase tracked label (buttons, form labels, badges) */
+  .type-micro {
+    font-family: var(--font-josefin), sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.20em;
+  }
+
 }
