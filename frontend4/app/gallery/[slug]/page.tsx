@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import ScrollToTop from "../../components/ScrollToTop";
 import PortableText from "../../components/PortableText";
 import { SimpleProjectCard } from "../GalleryList";
 import BeforeAfterSlider from "./BeforeAfterSlider";
+import MorePhotosGallery from "./MorePhotosGallery";
 import { client } from "../../../sanity/lib/client";
 import { sanityFetch } from "../../../sanity/lib/fetch";
 import {
@@ -187,34 +187,18 @@ export default async function ProjectPage(
             <p className="mb-8 type-eyebrow">
               More Photos
             </p>
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-              {project.morePhotos.map((photo) => {
-                const photoUrl = photo.image
+            <MorePhotosGallery
+              photos={project.morePhotos.map((photo) => ({
+                label: photo.label,
+                alt: photo.image?.alt ?? photo.label,
+                thumbUrl: photo.image
                   ? urlFor(photo.image).width(800).fit("max").auto("format").url()
-                  : null;
-                return (
-                  <div
-                    key={photo.label}
-                    className="relative aspect-[4/3] w-full overflow-hidden border border-border bg-surface"
-                  >
-                    {photoUrl ? (
-                      <Image
-                        src={photoUrl}
-                        alt={photo.image?.alt ?? photo.label}
-                        fill
-                        sizes="(min-width: 768px) 33vw, 100vw"
-                        className="object-cover"
-                      />
-                    ) : (
-                      <div className="absolute inset-3 border border-dashed border-border" />
-                    )}
-                    <span className="absolute bottom-4 left-4 bg-background/80 px-2 py-1 type-micro text-foreground">
-                      {photo.label}
-                    </span>
-                  </div>
-                );
-              })}
-            </div>
+                  : null,
+                fullUrl: photo.image
+                  ? urlFor(photo.image).width(2000).fit("max").auto("format").url()
+                  : null,
+              }))}
+            />
           </div>
         </section>
       )}
