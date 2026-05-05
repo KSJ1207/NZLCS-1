@@ -31,7 +31,7 @@ export default function TestimonialsSection({
         </div>
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {list.map((t) => {
-            const photo = t.authorImage
+            const photo = t.authorImage?.asset
               ? urlFor(t.authorImage).width(96).height(96).fit("crop").auto("format").url()
               : null;
             return (
