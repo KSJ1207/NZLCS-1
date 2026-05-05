@@ -19,7 +19,7 @@ type DirectContact = {
 function buildDirectContacts(site: SiteSettings | null): DirectContact[] {
   const items: DirectContact[] = [];
   const addressLine = site?.address
-    ? [site.address.suburb, site.address.city, site.address.region]
+    ? [site.address.street, site.address.suburb, site.address.city, site.address.region]
         .filter(Boolean)
         .join(", ")
     : null;
@@ -121,7 +121,7 @@ export default async function ContactPage() {
   const heroSection = page.sections?.find((s) => s._type === "heroSection") ?? null;
   const directContacts = buildDirectContacts(site);
   const addressQuery = site?.address
-    ? [site.address.suburb, site.address.city, site.address.region]
+    ? [site.address.street, site.address.suburb, site.address.city, site.address.region]
         .filter(Boolean)
         .join(",")
     : "Auckland,New+Zealand";
