@@ -75,6 +75,7 @@ export const siteSettings = defineType({
       type: "object",
       group: "contact",
       fields: [
+        { name: "unit", title: "Unit / Suite", type: "string" },
         { name: "street", title: "Street", type: "string" },
         { name: "suburb", title: "Suburb", type: "string" },
         {

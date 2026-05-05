@@ -31,7 +31,7 @@ export default async function Home() {
     ? site.mapEmbedUrl
     : `https://www.google.com/maps?q=${encodeURIComponent(
         site?.address
-          ? [site.address.street, site.address.suburb, site.address.city, site.address.region]
+          ? [site.address.unit, site.address.street, site.address.suburb, site.address.city, site.address.region]
               .filter(Boolean)
               .join(",")
           : "Auckland,New+Zealand",

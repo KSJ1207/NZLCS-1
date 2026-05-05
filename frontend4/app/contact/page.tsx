@@ -19,7 +19,7 @@ type DirectContact = {
 function buildDirectContacts(site: SiteSettings | null): DirectContact[] {
   const items: DirectContact[] = [];
   const addressLine = site?.address
-    ? [site.address.street, site.address.suburb, site.address.city, site.address.region]
+    ? [site.address.unit, site.address.street, site.address.suburb, site.address.city, site.address.region]
         .filter(Boolean)
         .join(", ")
     : null;
@@ -124,7 +124,7 @@ export default async function ContactPage() {
     ? site.mapEmbedUrl
     : `https://www.google.com/maps?q=${encodeURIComponent(
         site?.address
-          ? [site.address.street, site.address.suburb, site.address.city, site.address.region]
+          ? [site.address.unit, site.address.street, site.address.suburb, site.address.city, site.address.region]
               .filter(Boolean)
               .join(",")
           : "Auckland,New+Zealand",
