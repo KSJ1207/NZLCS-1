@@ -45,25 +45,31 @@ export default async function Home() {
     <div className="min-h-screen w-full bg-background text-foreground font-sans">
       <ScrollToTop />
 
-      {/* HERO — full bleed video (kept hardcoded; Sanity heroSection on home is bypassed) */}
-      <section className="relative h-screen min-h-[640px] w-full overflow-hidden">
+      {/* HERO — full bleed video (kept hardcoded; Sanity heroSection on home is bypassed).
+          Layout: content sits in a flex column anchored to the bottom with a top
+          pad equal to --nav-safe-area, so the heading can never grow tall enough
+          to slide under the fixed header. */}
+      <section className="relative min-h-[100svh] w-full overflow-hidden">
         <video
           src={HERO_VIDEO}
           autoPlay
           muted
           loop
           playsInline
-          className="absolute inset-0 h-full w-full object-cover scale-x-[-1]"
+          className="absolute inset-0 z-0 h-full w-full object-cover scale-x-[-1]"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/45 to-black/85" />
-        <div className="absolute inset-x-0 bottom-0 z-10">
-          <div className="mx-auto max-w-[1280px] px-8 pb-20">
+        <div className="absolute inset-0 z-0 bg-gradient-to-b from-black/60 via-black/45 to-black/85" />
+        <div className="relative z-20 flex min-h-[100svh] items-end">
+          <div
+            className="mx-auto w-full max-w-[1280px] px-6 pb-12 sm:px-8 md:pb-16 lg:pb-20"
+            style={{ paddingTop: "var(--nav-safe-area)" }}
+          >
             <div className="max-w-xl md:max-w-2xl text-white">
-              <p className="mb-5 text-brand-light tracking-[0.22em] type-title-xs uppercase">
+              <p className="mb-5 type-eyebrow text-brand-light">
                 <span className="block">New Zealand</span>
                 <span className="block">Laser Cleaning Solutions</span>
               </p>
-              <h1 className="type-title-lg text-balance">
+              <h1 className="hero-title">
                 <span className="block">Clean with laser precision.</span>
                 <span className="mt-2 md:mt-3 lg:mt-4 block">Leave no trace on the environment.</span>
               </h1>
@@ -72,7 +78,7 @@ export default async function Home() {
                 advanced laser technology — no chemicals, no damage.
                 Auckland-based, servicing industrial, commercial, and infrastructure projects across New Zealand.
               </p>
-              <div className="mt-8 flex items-center gap-6 type-micro">
+              <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 type-micro">
                 <Link
                   href="/contact"
                   className="border-b border-white pb-1 text-white hover:text-brand-light hover:border-brand-light"

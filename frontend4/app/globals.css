@@ -21,6 +21,9 @@
   --secondary: #EDEBE7;
   --accent: #7FA882;
   --on-brand: #141311;
+  /* Reserved space below the fixed header so hero/page content can never
+     physically slide under the nav on short viewports. Header is ~96px. */
+  --nav-safe-area: clamp(5.5rem, 10vh, 8rem);
 }
 
 /* ---------- PRESET B — Warm Brown (previous) ----------
@@ -111,6 +114,22 @@ body {
     font-weight: 700;
     line-height: 1.05;
     overflow-wrap: break-word;
+  }
+
+  /* Hero title — bounded so a wrapped two-line headline can't grow tall enough
+     to collide with the fixed nav on short laptop screens (e.g. 1366×768). */
+  .hero-title {
+    font-family: var(--font-josefin), sans-serif;
+    font-size: clamp(2.25rem, 3vw + 1rem, 4.25rem);
+    font-weight: 700;
+    line-height: 1.05;
+    text-wrap: balance;
+    overflow-wrap: break-word;
+  }
+  @media (max-height: 720px) {
+    .hero-title {
+      font-size: clamp(1.875rem, 2.5vw + 0.9rem, 3rem);
+    }
   }
 
   /* Title LG — section heading. 32px → 68px. */
