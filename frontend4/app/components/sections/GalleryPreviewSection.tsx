@@ -15,14 +15,14 @@ export default function GalleryPreviewSection({
   const list = mode === "latest" ? all.slice(0, count ?? 3) : all;
   return (
     <section className="border-b border-border">
-      <div className="container-page py-16 md:py-20 lg:py-24 2xl:py-28">
-        <div className="mb-12 max-w-3xl">
+      <div className="container-page py-16 md:py-20 lg:py-24 2xl:py-28 3xl:py-36">
+        <div className="mb-12 max-w-3xl 4xl:max-w-5xl">
           {eyebrow && <p className="mb-3 type-eyebrow">{eyebrow}</p>}
           <h2 className="type-title-lg">{heading}</h2>
           {intro && <p className="mt-5 type-body">{intro}</p>}
         </div>
         {list.length > 0 ? (
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-6 3xl:gap-8 md:grid-cols-2 lg:grid-cols-3">
             {list.map((project) => {
               const before = project.beforeImage
                 ? urlFor(project.beforeImage).width(800).fit("max").auto("format").url()

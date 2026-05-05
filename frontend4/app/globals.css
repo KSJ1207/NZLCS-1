@@ -75,6 +75,15 @@
   --color-surface-rust: var(--surface-rust);
   --font-sans: var(--font-josefin);
   --font-body: var(--font-body);
+  /* Ultra-wide 3xl layer. 1920px Full HD already works well; 2048px is where
+     2K/4K polish kicks in (wider container caps, larger heading ceilings,
+     extra section spacing). Below 2048px nothing changes. Tailwind v4
+     recommends rem for custom breakpoints to match the built-in defaults. */
+  --breakpoint-3xl: 128rem; /* 2048px @ 16px root */
+  /* True-4K 4xl layer. 3xl handles 2K well, but at 3840×2160 the 1680px
+     container still leaves ~1080px gutters per side. 4xl widens the container
+     only at ≥ 3200px so 4K feels less empty without disturbing 2560×1440. */
+  --breakpoint-4xl: 200rem; /* 3200px @ 16px root */
 }
 
 body {
@@ -101,7 +110,7 @@ body {
      padding. Use on any section's inner content wrapper. Don't apply to grid
      wrappers whose cells provide their own px (the cell padding would double up). */
   .container-page {
-    @apply mx-auto w-full max-w-[1280px] 2xl:max-w-[1440px] px-4 sm:px-6 lg:px-8;
+    @apply mx-auto w-full max-w-[1280px] px-4 sm:px-6 lg:px-8 2xl:max-w-[1440px] 3xl:max-w-[1680px] 4xl:max-w-[2400px];
   }
 
   /* Page container (grid variant) — same widths as .container-page but without
@@ -109,7 +118,7 @@ body {
      their own px (so .container-page would double-pad). Keeps grid sections in
      visual sync with normal sections at 2xl. */
   .container-page-grid {
-    @apply mx-auto w-full max-w-[1280px] 2xl:max-w-[1440px];
+    @apply mx-auto w-full max-w-[1280px] 2xl:max-w-[1440px] 3xl:max-w-[1680px] 4xl:max-w-[2400px];
   }
 
   /* Eyebrow — small all-caps brand-color label above titles or sections */
@@ -240,4 +249,52 @@ body {
     letter-spacing: 0.20em;
   }
 
+}
+
+/* =========================================================================
+   3xl heading ceilings (≥ 2048px only)
+   Lifts the upper clamp bound for large display headings on 2K/4K screens.
+   The slope/min are unchanged from the base classes — only the cap moves up.
+   Lives outside @layer components so it always wins at this viewport range
+   regardless of source order. Anything below 2048px is byte-identical to
+   the previously approved 1920px responsive design.
+   ========================================================================= */
+@media (min-width: 2048px) {
+  .hero-eyebrow {
+    font-size: clamp(1.0625rem, 0.55vw + 0.88rem, 1.5rem);
+  }
+  .hero-title {
+    font-size: clamp(2.5rem, 4.5vw, 5.75rem);
+  }
+  .type-title-xl {
+    font-size: clamp(2.5rem, 4vw + 1rem, 6.25rem);
+  }
+  .type-title-lg {
+    font-size: clamp(2rem, 3vw + 1rem, 4.75rem);
+  }
+}
+
+/* =========================================================================
+   4xl heading ceilings (≥ 3200px only)
+   Lifts the upper clamp bound a second time for true-4K screens. The slope
+   stays the same; only the cap moves up. ≤ 3199px is byte-identical to the
+   3xl design — 2K (2560×1440) is unaffected.
+
+   Note on .hero-title: intentionally NOT bumped at 4xl. The home hero text
+   block is bounded by 3xl:max-w-[52rem] (832px); raising the hero-title cap
+   to 6.5rem at 4K caused "Clean with laser precision." to wrap into one
+   extra line. Hero composition is locked this phase, so the cap stays at
+   the 3xl value (5.75rem). Eyebrow/title-xl/title-lg are not similarly
+   constrained.
+   ========================================================================= */
+@media (min-width: 3200px) {
+  .hero-eyebrow {
+    font-size: clamp(1rem, 0.55vw + 0.88rem, 1.625rem);
+  }
+  .type-title-xl {
+    font-size: clamp(2.5rem, 4vw + 1rem, 7rem);
+  }
+  .type-title-lg {
+    font-size: clamp(2rem, 3vw + 1rem, 5.25rem);
+  }
 }

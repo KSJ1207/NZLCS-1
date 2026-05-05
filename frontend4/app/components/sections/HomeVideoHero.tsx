@@ -16,11 +16,11 @@ export default function HomeVideoHero() {
         muted
         loop
         playsInline
-        className="absolute inset-0 z-0 h-full w-full object-cover object-[58%_center] scale-x-[-1] md:object-[62%_center] xl:object-[65%_center]"
+        className="absolute inset-0 z-0 h-full w-full object-cover object-[58%_center] scale-x-[-1] md:object-[62%_center] xl:object-[65%_center] 3xl:object-[68%_center]"
       />
 
       {/* Left-weighted gradient for text legibility */}
-      <div className="absolute inset-0 z-10 bg-gradient-to-r from-black/75 via-black/35 to-black/10" />
+      <div className="absolute inset-0 z-10 bg-gradient-to-r from-black/75 via-black/35 to-black/10 3xl:from-black/80" />
       {/* Bottom darkening for the bottom-anchored content */}
       <div className="absolute inset-0 z-10 bg-gradient-to-b from-transparent via-transparent to-black/70" />
 
@@ -28,11 +28,11 @@ export default function HomeVideoHero() {
           reserving --nav-safe-area at the top so a tall wrapped headline can't
           slide under the fixed nav. */}
       <div
-        className="relative z-20 flex min-h-[100svh] items-end pb-10 sm:pb-14 md:pb-16 lg:pb-20 2xl:pb-24"
+        className="relative z-20 flex min-h-[100svh] items-end pb-10 sm:pb-14 md:pb-16 lg:pb-20 2xl:pb-24 3xl:pb-32"
         style={{ paddingTop: "var(--nav-safe-area)" }}
       >
-        <div className="mx-auto w-full max-w-[1280px] 2xl:max-w-[1440px] px-4 sm:px-6 lg:px-8">
-          <div className="w-full max-w-xl md:max-w-2xl 2xl:max-w-[44rem] min-w-0 text-white">
+        <div className="mx-auto w-full max-w-[1280px] 2xl:max-w-[1440px] 3xl:max-w-[1760px] px-4 sm:px-6 lg:px-8">
+          <div className="w-full max-w-xl md:max-w-2xl 2xl:max-w-[44rem] 3xl:max-w-[52rem] min-w-0 text-white">
             <p className="mb-5 hero-eyebrow text-brand-light">
               <span className="block">New Zealand</span>
               <span className="block">Laser Cleaning Solutions</span>

@@ -17,7 +17,7 @@ export default function ServicesPreviewSection({
     <section id="services" className="border-t border-border">
       <div className="container-page pt-16 md:pt-20 lg:pt-24 2xl:pt-28 pb-12">
         <div className="flex flex-col justify-between gap-6 md:flex-row md:items-start">
-          <div className="max-w-3xl">
+          <div className="max-w-3xl 4xl:max-w-5xl">
             {eyebrow && <p className="mb-3 type-eyebrow">{eyebrow}</p>}
             <h2 className="type-title-lg">{heading}</h2>
             {intro && <p className="mt-5 type-body">{intro}</p>}

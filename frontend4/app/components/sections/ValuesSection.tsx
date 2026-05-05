@@ -94,7 +94,7 @@ export default function ValuesSection({ section }: { section: ValuesSectionT }) 
     return (
       <section className="border-t border-border">
         <div className="container-page pt-16 md:pt-20 lg:pt-24 2xl:pt-28 pb-12">
-          <div className="max-w-2xl">
+          <div className="max-w-2xl 4xl:max-w-4xl">
             {eyebrow && <p className="mb-3 type-eyebrow">{eyebrow}</p>}
             {heading && <h2 className="type-title-lg">{heading}</h2>}
             {intro && <p className="mt-5 max-w-xl type-body">{intro}</p>}
@@ -126,7 +126,7 @@ export default function ValuesSection({ section }: { section: ValuesSectionT }) 
     <section className="border-b border-border">
       <div className="container-page pt-16 md:pt-20 lg:pt-24 2xl:pt-28 pb-12">
         {(eyebrow || heading || intro) && (
-          <div className="mb-12 max-w-3xl">
+          <div className="mb-12 max-w-3xl 4xl:max-w-5xl">
             {eyebrow && <p className="mb-3 type-eyebrow">{eyebrow}</p>}
             {heading && <h2 className="type-title-lg">{heading}</h2>}
             {intro && <p className="mt-5 type-body">{intro}</p>}

@@ -52,7 +52,7 @@ export default function GalleryList({
       <section>
         <div className="container-page py-12">
           {visible.length === 0 ? (
-            <div className="py-16 md:py-20 lg:py-24 2xl:py-28 text-center">
+            <div className="py-16 md:py-20 lg:py-24 2xl:py-28 3xl:py-32 text-center">
               <p className="type-body">
                 No projects in this category yet.
               </p>

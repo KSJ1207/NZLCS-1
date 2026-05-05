@@ -70,7 +70,7 @@ export default async function BlogPage() {
 
       {/* BOTTOM CTA */}
       <section className="border-t border-border">
-        <div className="container-page py-16 md:py-20 lg:py-24 2xl:py-28 text-center">
+        <div className="container-page py-16 md:py-20 lg:py-24 2xl:py-28 3xl:py-36 text-center">
           <p className="mb-3 type-eyebrow">
             Ready To Start?
           </p>

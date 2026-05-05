@@ -15,10 +15,10 @@ export default function RichTextSection({
   if (!image) {
     return (
       <section className="border-b border-border">
-        <div className="container-page py-16 md:py-20 lg:py-24 2xl:py-28 text-center">
+        <div className="container-page py-16 md:py-20 lg:py-24 2xl:py-28 3xl:py-32 text-center">
           {eyebrow && <p className="mb-5 type-eyebrow">{eyebrow}</p>}
           {heading && (
-            <h2 className="mx-auto max-w-3xl type-title-lg">{heading}</h2>
+            <h2 className="mx-auto max-w-3xl 4xl:max-w-5xl type-title-lg">{heading}</h2>
           )}
           <div className="mx-auto mt-8 max-w-prose text-foreground">
             <PortableText value={body} />

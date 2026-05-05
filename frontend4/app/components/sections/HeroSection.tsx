@@ -55,9 +55,9 @@ export default function HeroSection({ section }: { section: HeroSectionT }) {
       />
       <div className="container-page relative z-10">
         {eyebrow && <p className="mb-5 type-eyebrow">{eyebrow}</p>}
-        <h1 className="max-w-3xl type-title-xl">{heading}</h1>
+        <h1 className="max-w-3xl 4xl:max-w-[64rem] type-title-xl">{heading}</h1>
         {subheading && (
-          <p className="mt-8 max-w-xl type-body">{subheading}</p>
+          <p className="mt-8 max-w-xl 4xl:max-w-2xl type-body">{subheading}</p>
         )}
 
         {(primaryCta || secondaryCta) && (

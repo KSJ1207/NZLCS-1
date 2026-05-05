@@ -114,13 +114,13 @@ export default function Header({ siteSettings, navigation }: HeaderProps) {
             width={100}
             height={100}
             priority
-            className="h-20 w-auto"
+            className="h-20 w-auto 3xl:h-24 4xl:h-28"
           />
-          <span className="font-sans text-[18px] font-bold uppercase tracking-[0.15em] text-foreground leading-none">
+          <span className="font-sans text-[18px] 3xl:text-[22px] 4xl:text-[24px] font-bold uppercase tracking-[0.15em] text-foreground leading-none">
             {brandName}
           </span>
         </Link>
-        <nav className="hidden items-center gap-9 type-micro-lg lg:flex">
+        <nav className="hidden items-center gap-9 3xl:gap-12 4xl:gap-14 type-micro-lg 3xl:text-[16px] 4xl:text-[17px] lg:flex">
           {navLinks.map((cta, i) => {
             const href = ctaHref(cta);
             const isActive =
