@@ -26,7 +26,7 @@ export default function HeroSection({ section }: { section: HeroSectionT }) {
   };
 
   return (
-    <section className="relative overflow-hidden border-b border-border pt-[180px] pb-28">
+    <section className="relative overflow-hidden border-b border-border pt-[120px] md:pt-[160px] lg:pt-[180px] pb-16 md:pb-24 lg:pb-28">
       {bgUrl ? (
         <Image
           src={bgUrl}
@@ -53,7 +53,7 @@ export default function HeroSection({ section }: { section: HeroSectionT }) {
             "radial-gradient(ellipse 55% 70% at 80% 50%,rgba(var(--brand-rgb) / 0.06) 0%,transparent 65%)",
         }}
       />
-      <div className="relative z-10 mx-auto max-w-[1280px] px-8">
+      <div className="container-page relative z-10">
         {eyebrow && <p className="mb-5 type-eyebrow">{eyebrow}</p>}
         <h1 className="max-w-3xl type-title-xl">{heading}</h1>
         {subheading && (

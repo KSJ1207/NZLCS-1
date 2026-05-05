@@ -37,7 +37,7 @@ export default function Footer({ siteSettings, navigation }: FooterProps) {
 
   return (
     <footer className="border-t border-border">
-      <div className="mx-auto grid max-w-[1280px] grid-cols-2 gap-10 px-8 py-20 md:grid-cols-4">
+      <div className="container-page grid grid-cols-2 gap-10 py-20 md:grid-cols-4">
         <div>
           <Image
             src={LOGO_SRC}
@@ -125,7 +125,7 @@ export default function Footer({ siteSettings, navigation }: FooterProps) {
         </div>
       </div>
       <div className="bg-brand text-on-brand">
-        <div className="mx-auto flex max-w-[1280px] flex-col items-center justify-between gap-2 px-8 py-4 type-micro md:flex-row">
+        <div className="container-page flex flex-col items-center justify-between gap-2 py-4 type-micro md:flex-row">
           <span>{legal}</span>
           {(privacyUrl || termsUrl) && (
             <div className="flex gap-6">

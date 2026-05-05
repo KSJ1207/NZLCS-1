@@ -97,6 +97,21 @@ body {
      type-micro-lg / type-micro uppercase tracked UI labels
    ========================================================================= */
 @layer components {
+  /* Page container — single source of truth for content width + horizontal
+     padding. Use on any section's inner content wrapper. Don't apply to grid
+     wrappers whose cells provide their own px (the cell padding would double up). */
+  .container-page {
+    @apply mx-auto w-full max-w-[1280px] 2xl:max-w-[1440px] px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Page container (grid variant) — same widths as .container-page but without
+     horizontal padding. For full-bleed grid wrappers whose cells/columns set
+     their own px (so .container-page would double-pad). Keeps grid sections in
+     visual sync with normal sections at 2xl. */
+  .container-page-grid {
+    @apply mx-auto w-full max-w-[1280px] 2xl:max-w-[1440px];
+  }
+
   /* Eyebrow — small all-caps brand-color label above titles or sections */
   .type-eyebrow {
     font-family: var(--font-josefin), sans-serif;
@@ -104,6 +119,17 @@ body {
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.22em;
+    color: var(--brand);
+  }
+
+  /* Hero eyebrow — larger, responsive eyebrow for the home hero. 17px → 22px. */
+  .hero-eyebrow {
+    font-family: var(--font-josefin), sans-serif;
+    font-size: clamp(1.0625rem, 0.55vw + 0.88rem, 1.375rem);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    line-height: 1.4;
     color: var(--brand);
   }
 
@@ -116,19 +142,21 @@ body {
     overflow-wrap: break-word;
   }
 
-  /* Hero title — bounded so a wrapped two-line headline can't grow tall enough
-     to collide with the fixed nav on short laptop screens (e.g. 1366×768). */
+  /* Hero title — art-directed for the home video hero. Sized so it has presence
+     on 1920+ without going huge on small phones. The short-height fallback
+     prevents a wrapped two-line headline from colliding with the fixed nav on
+     short laptop screens (e.g. 1366×768, 1024×600). */
   .hero-title {
     font-family: var(--font-josefin), sans-serif;
-    font-size: clamp(2.25rem, 3vw + 1rem, 4.25rem);
+    font-size: clamp(2.5rem, 4.5vw, 5rem);
     font-weight: 700;
     line-height: 1.05;
     text-wrap: balance;
     overflow-wrap: break-word;
   }
-  @media (max-height: 720px) {
+  @media (max-height: 760px) {
     .hero-title {
-      font-size: clamp(1.875rem, 2.5vw + 0.9rem, 3rem);
+      font-size: clamp(2.25rem, 3.5vw, 4.25rem);
     }
   }
 

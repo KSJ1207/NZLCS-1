@@ -1,14 +1,13 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import ScrollToTop from "./components/ScrollToTop";
 import QuoteForm from "./components/QuoteForm";
+import HomeVideoHero from "./components/sections/HomeVideoHero";
 import SectionRenderer from "./components/sections/SectionRenderer";
 import { sanityFetch } from "../sanity/lib/fetch";
 import { homePageQuery, siteSettingsQuery } from "../sanity/lib/queries";
 import type { HomePage, SiteSettings } from "../sanity/lib/types";
 
 const HERO_SRC = "/Service_and_About_sample_image/Home_Quote.png";
-const HERO_VIDEO = "/home_video.mp4";
 
 export async function generateMetadata(): Promise<Metadata> {
   const [home, site] = await Promise.all([
@@ -45,64 +44,15 @@ export default async function Home() {
     <div className="min-h-screen w-full bg-background text-foreground font-sans">
       <ScrollToTop />
 
-      {/* HERO — full bleed video (kept hardcoded; Sanity heroSection on home is bypassed).
-          Layout: content sits in a flex column anchored to the bottom with a top
-          pad equal to --nav-safe-area, so the heading can never grow tall enough
-          to slide under the fixed header. */}
-      <section className="relative min-h-[100svh] w-full overflow-hidden">
-        <video
-          src={HERO_VIDEO}
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="absolute inset-0 z-0 h-full w-full object-cover scale-x-[-1]"
-        />
-        <div className="absolute inset-0 z-0 bg-gradient-to-b from-black/60 via-black/45 to-black/85" />
-        <div className="relative z-20 flex min-h-[100svh] items-end">
-          <div
-            className="mx-auto w-full max-w-[1280px] px-6 pb-12 sm:px-8 md:pb-16 lg:pb-20"
-            style={{ paddingTop: "var(--nav-safe-area)" }}
-          >
-            <div className="max-w-xl md:max-w-2xl text-white">
-              <p className="mb-5 type-eyebrow text-brand-light">
-                <span className="block">New Zealand</span>
-                <span className="block">Laser Cleaning Solutions</span>
-              </p>
-              <h1 className="hero-title">
-                <span className="block">Clean with laser precision.</span>
-                <span className="mt-2 md:mt-3 lg:mt-4 block">Leave no trace on the environment.</span>
-              </h1>
-              <p className="mt-6 max-w-md type-body text-white/85">
-                We remove rust, corrosion, and surface contaminants using
-                advanced laser technology — no chemicals, no damage.
-                Auckland-based, servicing industrial, commercial, and infrastructure projects across New Zealand.
-              </p>
-              <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 type-micro">
-                <Link
-                  href="/contact"
-                  className="border-b border-white pb-1 text-white hover:text-brand-light hover:border-brand-light"
-                >
-                  Get a Free Quote →
-                </Link>
-                <Link
-                  href="/services"
-                  className="border-b border-white pb-1 text-white hover:text-brand-light hover:border-brand-light"
-                >
-                  View Our Services
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* HERO — full-bleed video, art-directed. Sanity heroSection on home is bypassed. */}
+      <HomeVideoHero />
 
       {/* SANITY-DRIVEN SECTIONS — above-the-map group */}
       <SectionRenderer sections={aboveSections} />
 
       {/* FREE QUOTE INQUIRY — kept hardcoded (form left, image right) */}
       <section id="contact" className="border-t border-border">
-        <div className="mx-auto grid max-w-[1280px] grid-cols-1 md:grid-cols-2">
+        <div className="container-page-grid grid grid-cols-1 md:grid-cols-2">
           <div className="px-8 pt-24 pb-0 md:pr-14">
             <p className="mb-3 type-eyebrow">
               Free Quote Inquiry
@@ -130,7 +80,7 @@ export default async function Home() {
 
       {/* MAP — office location (kept hardcoded) */}
       <section className="border-t border-border">
-        <div className="mx-auto max-w-[1280px] px-8 pt-24 pb-12 text-center">
+        <div className="container-page pt-16 md:pt-20 lg:pt-24 2xl:pt-28 pb-12 text-center">
           <p className="mb-3 type-eyebrow">
             Visit Us
           </p>
@@ -142,7 +92,7 @@ export default async function Home() {
             across New Zealand.
           </p>
         </div>
-        <div className="mx-auto max-w-[1280px] px-8 pb-24">
+        <div className="container-page pb-16 md:pb-20 lg:pb-24 2xl:pb-28">
           <div className="overflow-hidden border border-border">
             <iframe
               title="NZLCS office location"

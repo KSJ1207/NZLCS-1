@@ -19,7 +19,7 @@ export default function TestimonialsSection({
   if (list.length === 0) {
     return (
       <section className="border-t border-border">
-        <div className="mx-auto max-w-[1280px] px-8 py-24 text-center">
+        <div className="container-page py-16 md:py-20 lg:py-24 2xl:py-28 text-center">
           {eyebrow && <p className="type-eyebrow mb-4">{eyebrow}</p>}
           {heading && <h2 className="type-title-lg">{heading}</h2>}
         </div>
@@ -36,7 +36,7 @@ export default function TestimonialsSection({
 
   return (
     <section className="border-b border-border bg-surface">
-      <div className="mx-auto max-w-[1280px] px-8 py-24">
+      <div className="container-page py-16 md:py-20 lg:py-24 2xl:py-28">
         <div className="mb-12 flex items-end justify-between gap-4">
           <div className="max-w-3xl">
             {eyebrow && <p className="mb-3 type-eyebrow">{eyebrow}</p>}

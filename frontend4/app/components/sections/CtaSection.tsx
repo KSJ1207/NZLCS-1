@@ -29,7 +29,7 @@ export default function CtaSection({ section }: { section: CtaSectionT }) {
           className="object-cover opacity-40"
         />
       )}
-      <div className="relative z-10 mx-auto max-w-[1280px] px-8 py-24 text-center">
+      <div className="container-page relative z-10 py-16 md:py-20 lg:py-24 2xl:py-28 text-center">
         {eyebrow && <p className="mb-4 type-eyebrow">{eyebrow}</p>}
         <h2 className="mx-auto max-w-3xl type-title-lg">{heading}</h2>
         {body && (

@@ -34,7 +34,7 @@ export default function GalleryList({
     <>
       {/* FILTER TABS — bracketed by top + bottom dividers */}
       <div className="border-y border-border">
-        <div className="mx-auto max-w-[1280px] px-8 py-5">
+        <div className="container-page py-5">
           <div className="flex flex-wrap items-center gap-2">
             {filters.map((cat) => (
               <FilterChip
@@ -50,15 +50,15 @@ export default function GalleryList({
 
       {/* PROJECT GRID — boxed cards with gaps */}
       <section>
-        <div className="mx-auto max-w-[1280px] px-8 py-12">
+        <div className="container-page py-12">
           {visible.length === 0 ? (
-            <div className="py-24 text-center">
+            <div className="py-16 md:py-20 lg:py-24 2xl:py-28 text-center">
               <p className="type-body">
                 No projects in this category yet.
               </p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {visible.map((project) => (
                 <ProjectCardLink key={project.slug} project={project} />
               ))}

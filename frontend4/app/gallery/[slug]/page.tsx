@@ -74,7 +74,7 @@ export default async function ProjectPage(
       <ScrollToTop />
 
       {/* HERO */}
-      <section className="relative overflow-hidden border-b border-border pt-[180px] pb-20">
+      <section className="relative overflow-hidden border-b border-border pt-[120px] md:pt-[160px] lg:pt-[180px] pb-20">
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 opacity-[0.035]"
@@ -92,7 +92,7 @@ export default async function ProjectPage(
               "radial-gradient(ellipse 55% 70% at 80% 50%,rgba(var(--brand-rgb) / 0.06) 0%,transparent 65%)",
           }}
         />
-        <div className="relative z-10 mx-auto max-w-[1280px] px-8">
+        <div className="container-page relative z-10">
           <div className="mb-8 flex flex-wrap items-center gap-2">
             <span className="bg-brand px-3 py-1.5 type-micro text-on-brand">
               {project.category}
@@ -120,7 +120,7 @@ export default async function ProjectPage(
 
       {/* BEFORE / AFTER COMPARISON */}
       <section className="border-t border-border">
-        <div className="mx-auto max-w-[1280px] px-8 pt-12 pb-16">
+        <div className="container-page pt-12 pb-16">
           <div className="mb-6 flex items-baseline justify-between">
             <p className="type-eyebrow">
               Before / After
@@ -136,13 +136,13 @@ export default async function ProjectPage(
       {/* ABOUT + SPECS */}
       {(hasBody || hasSpecs) && (
         <section className="border-t border-border">
-          <div className="mx-auto max-w-[1280px] px-8 py-20">
+          <div className="container-page py-20">
             <div className="grid grid-cols-1 gap-12 md:grid-cols-[1fr_minmax(0,420px)] md:gap-16">
               <div className="border-l-2 border-brand pl-6 md:pl-8">
                 <p className="mb-6 type-eyebrow">
                   About This Project
                 </p>
-                <div className="space-y-6">
+                <div className="space-y-6 max-w-prose">
                   {hasBody ? (
                     <PortableText value={project.body} variant="large" />
                   ) : (
@@ -183,7 +183,7 @@ export default async function ProjectPage(
       {/* MORE PHOTOS */}
       {project.morePhotos && project.morePhotos.length > 0 && (
         <section className="border-t border-border">
-          <div className="mx-auto max-w-[1280px] px-8 pt-16 pb-16">
+          <div className="container-page pt-16 pb-16">
             <p className="mb-8 type-eyebrow">
               More Photos
             </p>
@@ -206,7 +206,7 @@ export default async function ProjectPage(
       {/* RELATED WORK */}
       {related.length > 0 && (
         <section className="border-t border-border">
-          <div className="mx-auto max-w-[1280px] px-8 pt-24 pb-12">
+          <div className="container-page pt-16 md:pt-20 lg:pt-24 2xl:pt-28 pb-12">
             <div className="flex items-baseline justify-between gap-6">
               <div>
                 <p className="mb-3 type-eyebrow">
@@ -224,8 +224,8 @@ export default async function ProjectPage(
               </Link>
             </div>
           </div>
-          <div className="mx-auto max-w-[1280px] px-8 pb-16">
-            <div className="grid grid-cols-1 gap-10 md:grid-cols-3">
+          <div className="container-page pb-16">
+            <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3">
               {related.map((r) => (
                 <SimpleProjectCard key={r.slug} project={r} />
               ))}
@@ -236,7 +236,7 @@ export default async function ProjectPage(
 
       {/* BOTTOM CTA */}
       <section className="border-t border-border">
-        <div className="mx-auto max-w-[1280px] px-8 py-24 text-center">
+        <div className="container-page py-16 md:py-20 lg:py-24 2xl:py-28 text-center">
           <p className="mb-3 type-eyebrow">
             Have a similar project?
           </p>

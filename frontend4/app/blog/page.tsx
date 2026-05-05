@@ -34,7 +34,7 @@ export default async function BlogPage() {
       <ScrollToTop />
 
       {/* HERO */}
-      <section className="relative overflow-hidden border-b border-border pt-[180px] pb-28">
+      <section className="relative overflow-hidden border-b border-border pt-[120px] md:pt-[160px] lg:pt-[180px] pb-16 md:pb-24 lg:pb-28">
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 opacity-[0.035]"
@@ -52,7 +52,7 @@ export default async function BlogPage() {
               "radial-gradient(ellipse 55% 70% at 80% 50%,rgba(var(--brand-rgb) / 0.06) 0%,transparent 65%)",
           }}
         />
-        <div className="relative z-10 mx-auto max-w-[1280px] px-8">
+        <div className="container-page relative z-10">
           <p className="mb-3 type-eyebrow">
             Blog &amp; Resources
           </p>
@@ -70,7 +70,7 @@ export default async function BlogPage() {
 
       {/* BOTTOM CTA */}
       <section className="border-t border-border">
-        <div className="mx-auto max-w-[1280px] px-8 py-24 text-center">
+        <div className="container-page py-16 md:py-20 lg:py-24 2xl:py-28 text-center">
           <p className="mb-3 type-eyebrow">
             Ready To Start?
           </p>

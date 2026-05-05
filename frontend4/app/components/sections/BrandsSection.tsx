@@ -6,7 +6,7 @@ export default function BrandsSection({ section }: { section: BrandsSectionT }) 
   const { eyebrow, heading, brands } = section;
   return (
     <section className="border-b border-border">
-      <div className="mx-auto max-w-[1280px] px-8 py-16">
+      <div className="container-page py-16">
         {(eyebrow || heading) && (
           <div className="mb-12 text-center">
             {eyebrow && <p className="mb-3 type-eyebrow">{eyebrow}</p>}

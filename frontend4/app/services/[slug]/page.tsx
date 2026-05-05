@@ -105,7 +105,7 @@ export default async function ServiceDetailPage(
       <ScrollToTop />
 
       {/* HERO */}
-      <section className="relative overflow-hidden border-b border-border pt-[180px] pb-20">
+      <section className="relative overflow-hidden border-b border-border pt-[120px] md:pt-[160px] lg:pt-[180px] pb-20">
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 opacity-[0.035]"
@@ -123,7 +123,7 @@ export default async function ServiceDetailPage(
               "radial-gradient(ellipse 55% 70% at 80% 50%,rgba(var(--brand-rgb) / 0.06) 0%,transparent 65%)",
           }}
         />
-        <div className="relative z-10 mx-auto max-w-[1280px] px-8">
+        <div className="container-page relative z-10">
           <Link
             href="/services"
             className="mb-8 inline-block type-micro text-muted hover:text-brand-light"
@@ -140,7 +140,7 @@ export default async function ServiceDetailPage(
 
       {/* INTRO + HOW IT WORKS */}
       <section className="border-b border-border">
-        <div className="mx-auto grid max-w-[1280px] grid-cols-1 md:grid-cols-2">
+        <div className="container-page-grid grid grid-cols-1 md:grid-cols-2">
           <div className="px-8 py-16 md:border-r border-border md:pr-14">
             <p className="mb-4 type-eyebrow">The Problem</p>
             <p className="type-body">{service.intro}</p>
@@ -157,7 +157,7 @@ export default async function ServiceDetailPage(
       {/* APPLICATIONS */}
       {service.applications && service.applications.length > 0 && (
         <section className="border-b border-border">
-          <div className="mx-auto max-w-[1280px] px-8 py-16">
+          <div className="container-page py-16">
             <p className="mb-6 type-eyebrow">Ideal Applications</p>
             <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
               {service.applications.map((app, i) => {
@@ -186,7 +186,7 @@ export default async function ServiceDetailPage(
       {/* BENEFITS */}
       {service.benefits && service.benefits.length > 0 && (
         <section className="border-b border-border">
-          <div className="mx-auto max-w-[1280px] px-8 py-16">
+          <div className="container-page py-16">
             <p className="mb-6 type-eyebrow">Key Benefits</p>
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
               {service.benefits.map((b, i) => (
@@ -206,9 +206,9 @@ export default async function ServiceDetailPage(
       {/* RELATED PROJECTS */}
       {related.length > 0 && (
         <section className="border-b border-border">
-          <div className="mx-auto max-w-[1280px] px-8 py-16">
+          <div className="container-page py-16">
             <p className="mb-6 type-eyebrow">Related Projects</p>
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {related.map((p) => {
                 const before = p.beforeImage
                   ? urlFor(p.beforeImage).width(800).fit("max").auto("format").url()
@@ -248,7 +248,7 @@ export default async function ServiceDetailPage(
 
       {/* CTA */}
       <section className="border-t border-border bg-surface">
-        <div className="mx-auto flex max-w-[1280px] flex-col items-start justify-between gap-6 px-8 py-16 md:flex-row md:items-end">
+        <div className="container-page flex flex-col items-start justify-between gap-6 py-16 md:flex-row md:items-end">
           <div>
             <p className="mb-3 type-eyebrow">Ready to Talk?</p>
             <h2 className="type-title-md">Send us a photo of the job.</h2>

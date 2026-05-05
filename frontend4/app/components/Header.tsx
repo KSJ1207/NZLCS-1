@@ -106,7 +106,7 @@ export default function Header({ siteSettings, navigation }: HeaderProps) {
             : "bg-transparent"
       }`}
     >
-      <div className="mx-auto flex max-w-[1280px] items-center justify-between px-8 py-2">
+      <div className="container-page flex items-center justify-between py-2">
         <Link href="/" className="flex items-center gap-3">
           <Image
             src={LOGO_SRC}
@@ -120,7 +120,7 @@ export default function Header({ siteSettings, navigation }: HeaderProps) {
             {brandName}
           </span>
         </Link>
-        <nav className="hidden items-center gap-9 type-micro-lg md:flex">
+        <nav className="hidden items-center gap-9 type-micro-lg lg:flex">
           {navLinks.map((cta, i) => {
             const href = ctaHref(cta);
             const isActive =
@@ -143,7 +143,7 @@ export default function Header({ siteSettings, navigation }: HeaderProps) {
             );
           })}
         </nav>
-        <div className="hidden items-center gap-5 text-foreground md:flex">
+        <div className="hidden items-center gap-5 text-foreground lg:flex">
           {socials.map((s) => (
             <SocialIcon key={s.platform} social={s} />
           ))}
@@ -154,7 +154,7 @@ export default function Header({ siteSettings, navigation }: HeaderProps) {
           aria-expanded={menuOpen}
           aria-controls="mobile-menu"
           onClick={() => setMenuOpen((v) => !v)}
-          className="inline-flex h-11 w-11 items-center justify-center rounded-md text-foreground transition-colors hover:text-brand-light md:hidden"
+          className="inline-flex h-11 w-11 items-center justify-center rounded-md text-foreground transition-colors hover:text-brand-light lg:hidden"
         >
           {menuOpen ? (
             <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -172,7 +172,7 @@ export default function Header({ siteSettings, navigation }: HeaderProps) {
       </div>
       <div
         id="mobile-menu"
-        className={`md:hidden overflow-hidden border-t border-white/10 bg-background/95 backdrop-blur-md transition-[max-height,opacity] duration-300 ease-out ${
+        className={`lg:hidden overflow-hidden border-t border-white/10 bg-background/95 backdrop-blur-md transition-[max-height,opacity] duration-300 ease-out ${
           menuOpen ? "max-h-[80vh] opacity-100" : "max-h-0 opacity-0"
         }`}
       >

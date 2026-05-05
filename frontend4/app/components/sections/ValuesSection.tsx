@@ -76,7 +76,7 @@ function IconCard({ value }: { value: ValueProp }) {
           {[value.numberLabel, value.eyebrow].filter(Boolean).join(" — ")}
         </p>
       )}
-      <h3 className="font-sans text-xl font-bold leading-snug">{value.title}</h3>
+      <h3 className="type-title-xs">{value.title}</h3>
       <p className="mt-3 type-caption">{value.description}</p>
     </div>
   );
@@ -90,10 +90,10 @@ export default function ValuesSection({ section }: { section: ValuesSectionT }) 
   const hasImages = values.some((v) => v.image);
 
   if (hasImages) {
-    const cols = values.length === 4 ? "md:grid-cols-4" : values.length === 3 ? "md:grid-cols-3" : "md:grid-cols-2";
+    const cols = values.length === 4 ? "lg:grid-cols-4" : values.length === 3 ? "md:grid-cols-3" : "md:grid-cols-2";
     return (
       <section className="border-t border-border">
-        <div className="mx-auto max-w-[1280px] px-8 pt-24 pb-12">
+        <div className="container-page pt-16 md:pt-20 lg:pt-24 2xl:pt-28 pb-12">
           <div className="max-w-2xl">
             {eyebrow && <p className="mb-3 type-eyebrow">{eyebrow}</p>}
             {heading && <h2 className="type-title-lg">{heading}</h2>}
@@ -101,7 +101,7 @@ export default function ValuesSection({ section }: { section: ValuesSectionT }) 
           </div>
         </div>
         <div className="border-y border-border">
-          <div className={`mx-auto grid max-w-[1280px] grid-cols-1 sm:grid-cols-2 ${cols}`}>
+          <div className={`container-page-grid grid grid-cols-1 sm:grid-cols-2 ${cols}`}>
             {values.map((v, i) => (
               <ImageCard
                 key={`${v.title}-${i}`}
@@ -113,7 +113,7 @@ export default function ValuesSection({ section }: { section: ValuesSectionT }) 
           </div>
         </div>
         {footnote && (
-          <div className="mx-auto max-w-[1280px] px-8 py-12 text-center">
+          <div className="container-page py-12 text-center">
             <p className="type-body font-medium text-foreground">{footnote}</p>
           </div>
         )}
@@ -124,7 +124,7 @@ export default function ValuesSection({ section }: { section: ValuesSectionT }) 
   // Icon-card variant (about page style)
   return (
     <section className="border-b border-border">
-      <div className="mx-auto max-w-[1280px] px-8 pt-24 pb-12">
+      <div className="container-page pt-16 md:pt-20 lg:pt-24 2xl:pt-28 pb-12">
         {(eyebrow || heading || intro) && (
           <div className="mb-12 max-w-3xl">
             {eyebrow && <p className="mb-3 type-eyebrow">{eyebrow}</p>}

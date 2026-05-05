@@ -26,7 +26,7 @@ type Story = StoryObj;
 export const InContext: Story = {
   render: () => (
     <div className="min-h-screen w-full bg-background text-foreground font-sans">
-      <div className="mx-auto max-w-[1280px] px-8 pt-24 pb-32">
+      <div className="container-page pt-24 pb-32">
         {/* Page hero */}
         <p className="mb-5 type-eyebrow">Our Services</p>
         <h1 className="max-w-3xl type-title-xl">

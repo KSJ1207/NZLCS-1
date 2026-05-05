@@ -73,7 +73,7 @@ export default async function PostPage(props: PageProps<"/blog/[slug]">) {
       <ScrollToTop />
 
       {/* ARTICLE HERO */}
-      <section className="relative overflow-hidden border-b border-border pt-[180px] pb-20">
+      <section className="relative overflow-hidden border-b border-border pt-[120px] md:pt-[160px] lg:pt-[180px] pb-20">
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 opacity-[0.035]"
@@ -91,7 +91,7 @@ export default async function PostPage(props: PageProps<"/blog/[slug]">) {
               "radial-gradient(ellipse 55% 70% at 80% 0%,rgba(var(--brand-rgb) / 0.06) 0%,transparent 65%)",
           }}
         />
-        <div className="relative z-10 mx-auto max-w-[1280px] px-8">
+        <div className="container-page relative z-10">
           <div className="grid grid-cols-1 gap-12 md:grid-cols-2 md:items-center">
             <div>
               <p className="mb-4 type-eyebrow">
@@ -175,8 +175,8 @@ export default async function PostPage(props: PageProps<"/blog/[slug]">) {
 
       {/* BODY */}
       <section className="border-t border-border">
-        <div className="mx-auto max-w-[1280px] px-8 py-20">
-          <article className="mx-auto max-w-[680px]">
+        <div className="container-page py-20">
+          <article className="mx-auto max-w-prose">
             <PortableText value={post.body} variant="default" />
           </article>
         </div>
@@ -185,7 +185,7 @@ export default async function PostPage(props: PageProps<"/blog/[slug]">) {
       {/* RELATED ARTICLES */}
       {related.length > 0 && (
         <section className="border-t border-border">
-          <div className="mx-auto max-w-[1280px] px-8 pt-24 pb-12">
+          <div className="container-page pt-16 md:pt-20 lg:pt-24 2xl:pt-28 pb-12">
             <p className="mb-3 type-eyebrow">
               Related Articles
             </p>
@@ -193,8 +193,8 @@ export default async function PostPage(props: PageProps<"/blog/[slug]">) {
               Keep reading.
             </h2>
           </div>
-          <div className="mx-auto max-w-[1280px] px-8 pb-16">
-            <div className="grid grid-cols-1 gap-10 md:grid-cols-3">
+          <div className="container-page pb-16">
+            <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3">
               {related.map((r) => (
                 <SimpleBlogCard key={r.slug} post={r} />
               ))}
@@ -205,7 +205,7 @@ export default async function PostPage(props: PageProps<"/blog/[slug]">) {
 
       {/* BOTTOM CTA */}
       <section className="border-t border-border">
-        <div className="mx-auto max-w-[1280px] px-8 py-24 text-center">
+        <div className="container-page py-16 md:py-20 lg:py-24 2xl:py-28 text-center">
           <p className="mb-3 type-eyebrow">
             Ready To Start?
           </p>

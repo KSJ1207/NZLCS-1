@@ -100,7 +100,7 @@ function ServiceBlock({ service, index }: { service: Service; index: number }) {
       style={{ scrollMarginTop: "24px" }}
     >
       {/* Header row */}
-      <div className="mx-auto max-w-[1280px] px-8 pt-20 pb-14">
+      <div className="container-page pt-20 pb-14">
         {service.eyebrowNumber && (
           <p className="mb-3 type-eyebrow">{service.eyebrowNumber}</p>
         )}
@@ -113,7 +113,7 @@ function ServiceBlock({ service, index }: { service: Service; index: number }) {
       {/* Image + How It Works */}
       {service.howItWorks && (
         <div className="border-t border-border">
-          <div className="mx-auto grid max-w-[1280px] grid-cols-1 md:grid-cols-2">
+          <div className="container-page-grid grid grid-cols-1 md:grid-cols-2">
             <div
               className={[
                 "relative min-h-[320px] border-b border-border md:border-b-0",
@@ -148,10 +148,10 @@ function ServiceBlock({ service, index }: { service: Service; index: number }) {
       {/* Applications */}
       {service.applications && service.applications.length > 0 && (
         <div className="border-t border-border">
-          <div className="mx-auto max-w-[1280px] px-8 pt-12 pb-2">
+          <div className="container-page pt-12 pb-2">
             <p className="mb-6 type-eyebrow">Ideal Applications</p>
           </div>
-          <div className="mx-auto max-w-[1280px] px-8 pb-14">
+          <div className="container-page pb-14">
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
               {service.applications.map((app, i) => (
                 <ApplicationCard key={`${app.label}-${i}`} app={app} />
@@ -164,10 +164,10 @@ function ServiceBlock({ service, index }: { service: Service; index: number }) {
       {/* Benefits */}
       {service.benefits && service.benefits.length > 0 && (
         <div className="border-t border-border">
-          <div className="mx-auto max-w-[1280px] px-8 pt-12 pb-2">
+          <div className="container-page pt-12 pb-2">
             <p className="mb-6 type-eyebrow">Key Benefits</p>
           </div>
-          <div className="mx-auto max-w-[1280px] px-8 pb-16">
+          <div className="container-page pb-16">
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3">
               {service.benefits.map((b, i) => (
                 <BenefitCard key={`${b.title}-${i}`} b={b} />

@@ -42,3 +42,7 @@ next-env.d.ts
 
 *storybook.log
 storybook-static
+
+# local visual QA output and one-off capture scripts
+/scripts/qa-screens*/
+/scripts/visual-qa-*.mjs

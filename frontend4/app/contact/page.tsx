@@ -134,8 +134,8 @@ export default async function ContactPage() {
 
       {/* QUOTE REQUEST + DIRECT CONTACT */}
       <section className="border-t border-border">
-        <div className="mx-auto grid max-w-[1280px] grid-cols-1 lg:grid-cols-[1fr_1px_1fr]">
-          <div className="px-8 py-24 lg:pr-20">
+        <div className="container-page-grid grid grid-cols-1 lg:grid-cols-[1fr_1px_1fr]">
+          <div className="px-8 py-14 md:py-16 lg:py-20 2xl:py-24 lg:pr-20">
             <p className="mb-3 type-eyebrow">Free Quote Inquiry</p>
             <h2 className="type-title-lg">Request a Quote</h2>
             <p className="mt-5 max-w-md type-body">
@@ -177,7 +177,7 @@ export default async function ContactPage() {
 
           <div className="hidden lg:block my-24 border-l border-border" aria-hidden />
 
-          <div className="px-8 py-24 lg:pl-20">
+          <div className="px-8 py-14 md:py-16 lg:py-20 2xl:py-24 lg:pl-20">
             <QuoteForm formId="quote-upload-contact" formClassName="" />
           </div>
         </div>
@@ -185,7 +185,7 @@ export default async function ContactPage() {
 
       {/* MAP — office location */}
       <section className="border-t border-border">
-        <div className="mx-auto max-w-[1280px] px-8 pt-24 pb-12">
+        <div className="container-page pt-16 md:pt-20 lg:pt-24 2xl:pt-28 pb-12">
           <div className="flex flex-col justify-between gap-10 md:flex-row md:items-start">
             <div>
               <p className="mb-6 type-eyebrow">Visit Us</p>
@@ -196,7 +196,7 @@ export default async function ContactPage() {
             </p>
           </div>
         </div>
-        <div className="mx-auto max-w-[1280px] px-8 pb-24">
+        <div className="container-page pb-16 md:pb-20 lg:pb-24 2xl:pb-28">
           <div className="overflow-hidden border border-border">
             <iframe
               title="NZLCS office location"

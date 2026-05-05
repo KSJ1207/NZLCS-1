@@ -11,13 +11,13 @@ export default function FaqSection({ section }: { section: FaqSectionT }) {
 
   return (
     <section className="border-t border-border">
-      <div className="mx-auto max-w-[1280px] px-8 pt-20 pb-14">
+      <div className="container-page pt-20 pb-14">
         {eyebrow && <p className="mb-4 type-eyebrow">{eyebrow}</p>}
         {heading && <h2 className="type-title-lg">{heading}</h2>}
         {intro && <p className="mt-5 max-w-2xl type-body">{intro}</p>}
       </div>
 
-      <div className="mx-auto max-w-[1280px] px-8 pb-24">
+      <div className="container-page pb-16 md:pb-20 lg:pb-24 2xl:pb-28">
         <div className="border-t border-border">
           {faqs.map((item, i) => {
             const isOpen = openIndex === i;
@@ -37,7 +37,7 @@ export default function FaqSection({ section }: { section: FaqSectionT }) {
                   </span>
 
                   {/* Question */}
-                  <span className="flex-1 font-sans text-[15px] font-bold leading-snug md:text-[16px]">
+                  <span className="flex-1 font-sans text-base font-bold leading-snug">
                     {item.question}
                   </span>
 
@@ -62,7 +62,7 @@ export default function FaqSection({ section }: { section: FaqSectionT }) {
                 >
                   <div className="overflow-hidden">
                     <div className="space-y-4 pb-8 pl-[calc(2.5rem+1.25rem)]">
-                      <div className="type-body">
+                      <div className="type-body max-w-prose">
                         <PortableText value={item.answer} />
                       </div>
                       {item.tags && item.tags.length > 0 && (

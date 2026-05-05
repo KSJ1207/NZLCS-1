@@ -6,11 +6,16 @@
       "Bash(node -e \"require\\('lucide-react'\\)\")",
       "Bash(node -e \"require\\('@heroicons/react/24/outline'\\)\")",
       "Bash(npm install:*)",
-      "Bash(node -e \"require\\('lucide-react'\\); console.log\\('ok'\\)\")"
+      "Bash(node -e \"require\\('lucide-react'\\); console.log\\('ok'\\)\")",
+      "Bash(node scripts/visual-qa-pages.mjs)",
+      "Bash(curl -s 'http://localhost:3000/_next/static/chunks/%5Broot-of-the-server%5D__0t-iy29._.css')",
+      "Bash(curl -sf http://localhost:3000/ -o /dev/null)",
+      "Bash(curl -s http://localhost:3000/)",
+      "Bash(node scripts/visual-qa-2k-4k.mjs)"
     ]
   },
+  "enableAllProjectMcpServers": true,
   "enabledMcpjsonServers": [
     "Sanity"
-  ],
-  "enableAllProjectMcpServers": true
+  ]
 }

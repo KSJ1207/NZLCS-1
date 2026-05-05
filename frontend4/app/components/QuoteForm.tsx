@@ -57,7 +57,7 @@ export default function QuoteForm({ formId = "quote-upload", formClassName }: { 
             type={f.type}
             required={f.required}
             disabled={status === "sending"}
-            className="w-full border border-border bg-surface px-4 py-3 text-sm text-foreground placeholder:text-muted focus:border-brand focus:outline-none disabled:opacity-60"
+            className="w-full border border-border bg-surface px-4 py-3 text-base text-foreground placeholder:text-muted focus:border-brand focus:outline-none disabled:opacity-60 md:text-sm"
           />
         </div>
       ))}
@@ -74,7 +74,7 @@ export default function QuoteForm({ formId = "quote-upload", formClassName }: { 
           name="message"
           rows={4}
           disabled={status === "sending"}
-          className="w-full border border-border bg-surface px-4 py-3 text-sm text-foreground placeholder:text-muted focus:border-brand focus:outline-none disabled:opacity-60"
+          className="w-full border border-border bg-surface px-4 py-3 text-base text-foreground placeholder:text-muted focus:border-brand focus:outline-none disabled:opacity-60 md:text-sm"
         />
       </div>
 
