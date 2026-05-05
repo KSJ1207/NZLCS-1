@@ -9,10 +9,12 @@ import type { HomePage, SiteSettings } from "../sanity/lib/types";
 
 const HERO_SRC = "/Service_and_About_sample_image/Home_Quote.png";
 
+export const revalidate = 60;
+
 export async function generateMetadata(): Promise<Metadata> {
   const [home, site] = await Promise.all([
     sanityFetch<HomePage | null>({ query: homePageQuery, tags: ["homePage"] }),
-    sanityFetch<SiteSettings | null>({ query: siteSettingsQuery, tags: ["siteSettings"] }),
+    sanityFetch<SiteSettings | null>({ query: siteSettingsQuery, tags: ["siteSettings", "layout"] }),
   ]);
   const seo = home?.seo;
   return {
