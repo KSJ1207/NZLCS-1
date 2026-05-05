@@ -27,11 +27,15 @@ export default async function Home() {
     sanityFetch<SiteSettings | null>({ query: siteSettingsQuery, tags: ["siteSettings"] }),
   ]);
 
-  const addressQuery = site?.address
-    ? [site.address.street, site.address.suburb, site.address.city, site.address.region]
-        .filter(Boolean)
-        .join(",")
-    : "Auckland,New+Zealand";
+  const mapSrc = site?.mapEmbedUrl
+    ? site.mapEmbedUrl
+    : `https://www.google.com/maps?q=${encodeURIComponent(
+        site?.address
+          ? [site.address.street, site.address.suburb, site.address.city, site.address.region]
+              .filter(Boolean)
+              .join(",")
+          : "Auckland,New+Zealand",
+      )}&output=embed`;
 
   // The video hero replaces any heroSection on the home page — the video IS the hero.
   // The hardcoded QuoteForm replaces any ctaSection — they'd otherwise duplicate.
@@ -102,7 +106,7 @@ export default async function Home() {
           <div className="overflow-hidden border border-border">
             <iframe
               title="NZLCS office location"
-              src={`https://www.google.com/maps?q=${encodeURIComponent(addressQuery)}&output=embed`}
+              src={mapSrc}
               width="100%"
               height="450"
               style={{ border: 0, filter: "grayscale(0.6) contrast(1.1)" }}

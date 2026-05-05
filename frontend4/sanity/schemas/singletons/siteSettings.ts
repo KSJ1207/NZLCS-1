@@ -88,6 +88,15 @@ export const siteSettings = defineType({
       ],
     }),
     defineField({
+      name: "mapEmbedUrl",
+      title: "Google Maps embed URL",
+      description: "구글맵에서 원하는 위치 → 공유 → 지도 퍼가기 → URL만 복사해서 붙여넣기. 입력 시 주소 텍스트 대신 이 URL이 지도에 사용됩니다.",
+      type: "url",
+      group: "contact",
+      validation: (r) =>
+        r.uri({ scheme: ["https"] }).warning("https:// URL을 붙여넣어 주세요."),
+    }),
+    defineField({
       name: "serviceAreas",
       title: "Service areas",
       description: "Cities or regions you serve, e.g. 'Auckland', 'Wellington'.",

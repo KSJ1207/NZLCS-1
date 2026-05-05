@@ -48,6 +48,7 @@ export type SiteSettings = {
     region: string | null;
   } | null;
   serviceAreas: string[] | null;
+  mapEmbedUrl: string | null;
   socials: SocialLink[] | null;
   footerTagline: string | null;
   legalLine: string | null;

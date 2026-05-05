@@ -120,11 +120,15 @@ export default async function ContactPage() {
   // QuoteForm + Direct Contact aside + Google Maps embed keep their bespoke layout.
   const heroSection = page.sections?.find((s) => s._type === "heroSection") ?? null;
   const directContacts = buildDirectContacts(site);
-  const addressQuery = site?.address
-    ? [site.address.street, site.address.suburb, site.address.city, site.address.region]
-        .filter(Boolean)
-        .join(",")
-    : "Auckland,New+Zealand";
+  const mapSrc = site?.mapEmbedUrl
+    ? site.mapEmbedUrl
+    : `https://www.google.com/maps?q=${encodeURIComponent(
+        site?.address
+          ? [site.address.street, site.address.suburb, site.address.city, site.address.region]
+              .filter(Boolean)
+              .join(",")
+          : "Auckland,New+Zealand",
+      )}&output=embed`;
 
   return (
     <div className="min-h-screen w-full bg-background text-foreground font-sans">
@@ -200,7 +204,7 @@ export default async function ContactPage() {
           <div className="overflow-hidden border border-border">
             <iframe
               title="NZLCS office location"
-              src={`https://www.google.com/maps?q=${encodeURIComponent(addressQuery)}&output=embed`}
+              src={mapSrc}
               width="100%"
               height="450"
               style={{ border: 0, filter: "grayscale(0.6) contrast(1.1)" }}
