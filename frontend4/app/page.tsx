@@ -22,10 +22,16 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Home() {
-  const home = await sanityFetch<HomePage | null>({
-    query: homePageQuery,
-    tags: ["homePage"],
-  });
+  const [home, site] = await Promise.all([
+    sanityFetch<HomePage | null>({ query: homePageQuery, tags: ["homePage"] }),
+    sanityFetch<SiteSettings | null>({ query: siteSettingsQuery, tags: ["siteSettings"] }),
+  ]);
+
+  const addressQuery = site?.address
+    ? [site.address.street, site.address.suburb, site.address.city, site.address.region]
+        .filter(Boolean)
+        .join(",")
+    : "Auckland,New+Zealand";
 
   // The video hero replaces any heroSection on the home page — the video IS the hero.
   // The hardcoded QuoteForm replaces any ctaSection — they'd otherwise duplicate.
@@ -88,15 +94,15 @@ export default async function Home() {
             Our Office
           </h2>
           <p className="mx-auto mt-5 max-w-xl type-body">
-            Based in Auckland, serving industrial and commercial sites
-            across New Zealand.
+            Based in {site?.address?.city ?? "Auckland"}, serving industrial and commercial sites
+            across {site?.address?.region ?? "New Zealand"}.
           </p>
         </div>
         <div className="container-page pb-16 md:pb-20 lg:pb-24 2xl:pb-28">
           <div className="overflow-hidden border border-border">
             <iframe
               title="NZLCS office location"
-              src="https://www.google.com/maps?q=Auckland,New+Zealand&output=embed"
+              src={`https://www.google.com/maps?q=${encodeURIComponent(addressQuery)}&output=embed`}
               width="100%"
               height="450"
               style={{ border: 0, filter: "grayscale(0.6) contrast(1.1)" }}
