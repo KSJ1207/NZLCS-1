@@ -111,12 +111,12 @@ export default async function Home() {
             </p>
             <QuoteForm formId="quote-upload-home" />
           </div>
-          <div className="w-full border-t border-border md:border-t-0 md:border-l">
+          <div className="w-full border-t border-border md:relative md:border-t-0 md:border-l">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={HERO_SRC}
               alt="NZLCS team at work"
-              className="w-full h-auto block"
+              className="block h-auto w-full md:absolute md:inset-0 md:h-full md:object-cover"
             />
           </div>
         </div>

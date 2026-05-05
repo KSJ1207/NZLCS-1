@@ -8,9 +8,9 @@ export default function BrandsSection({ section }: { section: BrandsSectionT }) 
     <section className="border-b border-border">
       <div className="mx-auto max-w-[1280px] px-8 py-16">
         {(eyebrow || heading) && (
-          <div className="mb-8 text-center">
-            {eyebrow && <p className="mb-2 type-eyebrow">{eyebrow}</p>}
-            {heading && <h2 className="type-title-md">{heading}</h2>}
+          <div className="mb-12 text-center">
+            {eyebrow && <p className="mb-3 type-eyebrow">{eyebrow}</p>}
+            {heading && <h2 className="type-title-lg">{heading}</h2>}
           </div>
         )}
         <ul className="flex flex-wrap items-center justify-center gap-x-12 gap-y-6">
