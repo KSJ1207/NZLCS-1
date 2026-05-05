@@ -9,7 +9,7 @@ import type { HomePage, SiteSettings } from "../sanity/lib/types";
 
 const HERO_SRC = "/Service_and_About_sample_image/Home_Quote.png";
 
-export const revalidate = 60;
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata(): Promise<Metadata> {
   const [home, site] = await Promise.all([
@@ -26,7 +26,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function Home() {
   const [home, site] = await Promise.all([
     sanityFetch<HomePage | null>({ query: homePageQuery, tags: ["homePage"] }),
-    sanityFetch<SiteSettings | null>({ query: siteSettingsQuery, tags: ["siteSettings", "layout"], revalidate: 0 }),
+    sanityFetch<SiteSettings | null>({ query: siteSettingsQuery, tags: ["siteSettings", "layout"] }),
   ]);
 
   const mapSrc = site?.mapEmbedUrl
