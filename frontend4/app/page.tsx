@@ -26,7 +26,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function Home() {
   const [home, site] = await Promise.all([
     sanityFetch<HomePage | null>({ query: homePageQuery, tags: ["homePage"] }),
-    sanityFetch<SiteSettings | null>({ query: siteSettingsQuery, tags: ["siteSettings", "layout"] }),
+    sanityFetch<SiteSettings | null>({ query: siteSettingsQuery, tags: ["siteSettings", "layout"], revalidate: 0 }),
   ]);
 
   const mapSrc = site?.mapEmbedUrl
@@ -105,6 +105,7 @@ export default async function Home() {
           </p>
         </div>
         <div className="container-page pb-16 md:pb-20 lg:pb-24 2xl:pb-28">
+          <p className="mb-2 text-xs text-red-500">DEBUG: {site?.address?.suburb ?? "NO ADDRESS"} | {mapSrc.slice(0, 80)}</p>
           <div className="overflow-hidden border border-border">
             <iframe
               title="NZLCS office location"
