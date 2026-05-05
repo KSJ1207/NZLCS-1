@@ -1,4 +1,4 @@
-import { revalidateTag } from "next/cache";
+import { revalidateTag, revalidatePath } from "next/cache";
 import type { NextRequest } from "next/server";
 import { parseBody } from "next-sanity/webhook";
 
@@ -67,6 +67,8 @@ export async function POST(req: NextRequest) {
   }
   if (LAYOUT_TYPES.has(body._type)) {
     revalidateTag("layout");
+    revalidatePath("/", "page");
+    revalidatePath("/contact", "page");
   }
 
   return Response.json({ revalidated: true, type: body._type, slug: body.slug });
