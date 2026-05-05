@@ -94,7 +94,7 @@ export async function generateMetadata(): Promise<Metadata> {
       params: { slug: SLUG },
       tags: ["page", `page:${SLUG}`],
     }),
-    sanityFetch<SiteSettings | null>({ query: siteSettingsQuery, tags: ["siteSettings"] }),
+    sanityFetch<SiteSettings | null>({ query: siteSettingsQuery, tags: ["siteSettings", "layout"] }),
   ]);
   const seo = page?.seo;
   return {
@@ -111,7 +111,7 @@ export default async function ContactPage() {
       params: { slug: SLUG },
       tags: ["page", `page:${SLUG}`],
     }),
-    sanityFetch<SiteSettings | null>({ query: siteSettingsQuery, tags: ["siteSettings"] }),
+    sanityFetch<SiteSettings | null>({ query: siteSettingsQuery, tags: ["siteSettings", "layout"] }),
   ]);
 
   if (!page) notFound();
