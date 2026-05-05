@@ -55,6 +55,7 @@ function SocialIcon({ social }: { social: SocialLink }) {
 export default function Header({ siteSettings, navigation }: HeaderProps) {
   const [hidden, setHidden] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -85,6 +86,10 @@ export default function Header({ siteSettings, navigation }: HeaderProps) {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [pathname]);
+
   const brandName = siteSettings?.shortName || "NZLCS";
   const navLinks = navigation?.headerLinks ?? [];
   const socials = siteSettings?.socials ?? [];
@@ -94,7 +99,11 @@ export default function Header({ siteSettings, navigation }: HeaderProps) {
       className={`fixed inset-x-0 top-0 z-50 font-sans border-b border-white/20 transition-all duration-300 ease-out ${
         hidden ? "-translate-y-full" : "translate-y-0"
       } ${
-        scrolled ? "bg-background/85 backdrop-blur-md" : "bg-transparent"
+        menuOpen
+          ? "bg-background/95 backdrop-blur-md"
+          : scrolled
+            ? "bg-background/85 backdrop-blur-md"
+            : "bg-transparent"
       }`}
     >
       <div className="mx-auto flex max-w-[1280px] items-center justify-between px-8 py-2">
@@ -139,6 +148,65 @@ export default function Header({ siteSettings, navigation }: HeaderProps) {
             <SocialIcon key={s.platform} social={s} />
           ))}
         </div>
+        <button
+          type="button"
+          aria-label={menuOpen ? "Close menu" : "Open menu"}
+          aria-expanded={menuOpen}
+          aria-controls="mobile-menu"
+          onClick={() => setMenuOpen((v) => !v)}
+          className="inline-flex h-11 w-11 items-center justify-center rounded-md text-foreground transition-colors hover:text-brand-light md:hidden"
+        >
+          {menuOpen ? (
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+          ) : (
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <line x1="3" y1="6" x2="21" y2="6" />
+              <line x1="3" y1="12" x2="21" y2="12" />
+              <line x1="3" y1="18" x2="21" y2="18" />
+            </svg>
+          )}
+        </button>
+      </div>
+      <div
+        id="mobile-menu"
+        className={`md:hidden overflow-hidden border-t border-white/10 bg-background/95 backdrop-blur-md transition-[max-height,opacity] duration-300 ease-out ${
+          menuOpen ? "max-h-[80vh] opacity-100" : "max-h-0 opacity-0"
+        }`}
+      >
+        <nav className="flex flex-col gap-1 px-8 py-4 type-micro-lg">
+          {navLinks.map((cta, i) => {
+            const href = ctaHref(cta);
+            const isActive =
+              href === "/"
+                ? pathname === "/"
+                : pathname === href || pathname.startsWith(`${href}/`);
+            return (
+              <Link
+                key={`m-${cta.label}-${i}`}
+                href={href}
+                target={ctaTarget(cta)}
+                rel={ctaRel(cta)}
+                aria-current={isActive ? "page" : undefined}
+                onClick={() => setMenuOpen(false)}
+                className={`py-3 transition-colors ${
+                  isActive ? "text-brand-light" : "text-foreground hover:text-brand-light"
+                }`}
+              >
+                {cta.label}
+              </Link>
+            );
+          })}
+        </nav>
+        {socials.length > 0 && (
+          <div className="flex items-center gap-5 border-t border-white/10 px-8 py-4 text-foreground">
+            {socials.map((s) => (
+              <SocialIcon key={`m-${s.platform}`} social={s} />
+            ))}
+          </div>
+        )}
       </div>
     </header>
   );

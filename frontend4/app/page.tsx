@@ -58,14 +58,14 @@ export default async function Home() {
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/45 to-black/85" />
         <div className="absolute inset-x-0 bottom-0 z-10">
           <div className="mx-auto max-w-[1280px] px-8 pb-20">
-            <div className="max-w-xl text-white">
-              <p className="mb-4 text-brand-light tracking-widest type-title-md">
-                New Zealand<br />Laser Cleaning Solutions
+            <div className="max-w-xl md:max-w-2xl text-white">
+              <p className="mb-5 text-brand-light tracking-[0.22em] type-title-xs uppercase">
+                <span className="block">New Zealand</span>
+                <span className="block">Laser Cleaning Solutions</span>
               </p>
-              <h1 className="type-title-xl">
-                Clean with laser precision.
-                <br />
-                Leave no trace on the environment.
+              <h1 className="type-title-lg text-balance">
+                <span className="block">Clean with laser precision.</span>
+                <span className="mt-2 md:mt-3 lg:mt-4 block">Leave no trace on the environment.</span>
               </h1>
               <p className="mt-6 max-w-md type-body text-white/85">
                 We remove rust, corrosion, and surface contaminants using
