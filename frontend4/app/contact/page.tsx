@@ -19,7 +19,7 @@ type DirectContact = {
 function buildDirectContacts(site: SiteSettings | null): DirectContact[] {
   const items: DirectContact[] = [];
   const addressLine = site?.address
-    ? [site.address.unit, site.address.street, site.address.suburb, site.address.city, site.address.region]
+    ? [site.address.suburb, site.address.city, site.address.region]
         .filter(Boolean)
         .join(", ")
     : null;
@@ -94,7 +94,7 @@ export async function generateMetadata(): Promise<Metadata> {
       params: { slug: SLUG },
       tags: ["page", `page:${SLUG}`],
     }),
-    sanityFetch<SiteSettings | null>({ query: siteSettingsQuery, tags: ["siteSettings", "layout"] }),
+    sanityFetch<SiteSettings | null>({ query: siteSettingsQuery, tags: ["siteSettings"] }),
   ]);
   const seo = page?.seo;
   return {
@@ -111,7 +111,7 @@ export default async function ContactPage() {
       params: { slug: SLUG },
       tags: ["page", `page:${SLUG}`],
     }),
-    sanityFetch<SiteSettings | null>({ query: siteSettingsQuery, tags: ["siteSettings", "layout"] }),
+    sanityFetch<SiteSettings | null>({ query: siteSettingsQuery, tags: ["siteSettings"] }),
   ]);
 
   if (!page) notFound();
@@ -120,15 +120,11 @@ export default async function ContactPage() {
   // QuoteForm + Direct Contact aside + Google Maps embed keep their bespoke layout.
   const heroSection = page.sections?.find((s) => s._type === "heroSection") ?? null;
   const directContacts = buildDirectContacts(site);
-  const mapSrc = site?.mapEmbedUrl
-    ? site.mapEmbedUrl
-    : `https://www.google.com/maps?q=${encodeURIComponent(
-        site?.address
-          ? [site.address.unit, site.address.street, site.address.suburb, site.address.city, site.address.region]
-              .filter(Boolean)
-              .join(",")
-          : "Auckland,New+Zealand",
-      )}&output=embed`;
+  const addressQuery = site?.address
+    ? [site.address.suburb, site.address.city, site.address.region]
+        .filter(Boolean)
+        .join(",")
+    : "Auckland,New+Zealand";
 
   return (
     <div className="min-h-screen w-full bg-background text-foreground font-sans">
@@ -204,7 +200,7 @@ export default async function ContactPage() {
           <div className="overflow-hidden border border-border">
             <iframe
               title="NZLCS office location"
-              src={mapSrc}
+              src={`https://www.google.com/maps?q=${encodeURIComponent(addressQuery)}&output=embed`}
               width="100%"
               height="450"
               style={{ border: 0, filter: "grayscale(0.6) contrast(1.1)" }}

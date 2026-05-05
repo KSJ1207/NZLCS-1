@@ -41,7 +41,6 @@ export type SiteSettings = {
   primaryEmail: string;
   secondaryEmail: string | null;
   address: {
-    unit: string | null;
     street: string | null;
     suburb: string | null;
     city: string;
@@ -49,7 +48,6 @@ export type SiteSettings = {
     region: string | null;
   } | null;
   serviceAreas: string[] | null;
-  mapEmbedUrl: string | null;
   socials: SocialLink[] | null;
   footerTagline: string | null;
   legalLine: string | null;

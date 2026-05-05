@@ -9,12 +9,10 @@ import type { HomePage, SiteSettings } from "../sanity/lib/types";
 
 const HERO_SRC = "/Service_and_About_sample_image/Home_Quote.png";
 
-export const dynamic = "force-dynamic";
-
 export async function generateMetadata(): Promise<Metadata> {
   const [home, site] = await Promise.all([
     sanityFetch<HomePage | null>({ query: homePageQuery, tags: ["homePage"] }),
-    sanityFetch<SiteSettings | null>({ query: siteSettingsQuery, tags: ["siteSettings", "layout"] }),
+    sanityFetch<SiteSettings | null>({ query: siteSettingsQuery, tags: ["siteSettings"] }),
   ]);
   const seo = home?.seo;
   return {
@@ -24,20 +22,10 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Home() {
-  const [home, site] = await Promise.all([
-    sanityFetch<HomePage | null>({ query: homePageQuery, tags: ["homePage"] }),
-    sanityFetch<SiteSettings | null>({ query: siteSettingsQuery, tags: ["siteSettings", "layout"] }),
-  ]);
-
-  const mapSrc = site?.mapEmbedUrl
-    ? site.mapEmbedUrl
-    : `https://www.google.com/maps?q=${encodeURIComponent(
-        site?.address
-          ? [site.address.unit, site.address.street, site.address.suburb, site.address.city, site.address.region]
-              .filter(Boolean)
-              .join(",")
-          : "Auckland,New+Zealand",
-      )}&output=embed`;
+  const home = await sanityFetch<HomePage | null>({
+    query: homePageQuery,
+    tags: ["homePage"],
+  });
 
   // The video hero replaces any heroSection on the home page — the video IS the hero.
   // The hardcoded QuoteForm replaces any ctaSection — they'd otherwise duplicate.
@@ -100,16 +88,15 @@ export default async function Home() {
             Our Office
           </h2>
           <p className="mx-auto mt-5 max-w-xl type-body">
-            Based in {site?.address?.city ?? "Auckland"}, serving industrial and commercial sites
-            across {site?.address?.region ?? "New Zealand"}.
+            Based in Auckland, serving industrial and commercial sites
+            across New Zealand.
           </p>
         </div>
         <div className="container-page pb-16 md:pb-20 lg:pb-24 2xl:pb-28">
-          <p className="mb-2 text-xs text-red-500">DEBUG: {site?.address?.suburb ?? "NO ADDRESS"} | {mapSrc.slice(0, 80)}</p>
           <div className="overflow-hidden border border-border">
             <iframe
               title="NZLCS office location"
-              src={mapSrc}
+              src="https://www.google.com/maps?q=Auckland,New+Zealand&output=embed"
               width="100%"
               height="450"
               style={{ border: 0, filter: "grayscale(0.6) contrast(1.1)" }}

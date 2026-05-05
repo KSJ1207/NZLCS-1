@@ -25,7 +25,6 @@ export const siteSettingsQuery = defineQuery(`
     secondaryEmail,
     address,
     serviceAreas,
-    mapEmbedUrl,
     socials,
     footerTagline,
     legalLine,

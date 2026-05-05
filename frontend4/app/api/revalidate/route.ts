@@ -1,4 +1,4 @@
-import { revalidateTag, revalidatePath } from "next/cache";
+import { revalidateTag } from "next/cache";
 import type { NextRequest } from "next/server";
 import { parseBody } from "next-sanity/webhook";
 
@@ -61,14 +61,12 @@ export async function POST(req: NextRequest) {
 
   // Second arg is the stale-while-revalidate window. 'max' = serve stale for the
   // longest allowed window while the new content regenerates in the background.
-  revalidateTag(body._type);
+  revalidateTag(body._type, "max");
   if (body.slug) {
-    revalidateTag(`${body._type}:${body.slug}`);
+    revalidateTag(`${body._type}:${body.slug}`, "max");
   }
   if (LAYOUT_TYPES.has(body._type)) {
-    revalidateTag("layout");
-    revalidatePath("/", "page");
-    revalidatePath("/contact", "page");
+    revalidateTag("layout", "max");
   }
 
   return Response.json({ revalidated: true, type: body._type, slug: body.slug });

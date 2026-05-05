@@ -75,7 +75,6 @@ export const siteSettings = defineType({
       type: "object",
       group: "contact",
       fields: [
-        { name: "unit", title: "Unit / Suite", type: "string" },
         { name: "street", title: "Street", type: "string" },
         { name: "suburb", title: "Suburb", type: "string" },
         {
@@ -87,13 +86,6 @@ export const siteSettings = defineType({
         { name: "postcode", title: "Postcode", type: "string" },
         { name: "region", title: "Region / Country", type: "string" },
       ],
-    }),
-    defineField({
-      name: "mapEmbedUrl",
-      title: "Google Maps embed URL",
-      description: "구글맵에서 원하는 위치 → 공유 → 지도 퍼가기 → URL만 복사해서 붙여넣기. 입력 시 주소 텍스트 대신 이 URL이 지도에 사용됩니다.",
-      type: "string",
-      group: "contact",
     }),
     defineField({
       name: "serviceAreas",
