@@ -22,10 +22,10 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Home() {
-  const home = await sanityFetch<HomePage | null>({
-    query: homePageQuery,
-    tags: ["homePage"],
-  });
+  const [home, site] = await Promise.all([
+    sanityFetch<HomePage | null>({ query: homePageQuery, tags: ["homePage"] }),
+    sanityFetch<SiteSettings | null>({ query: siteSettingsQuery, tags: ["siteSettings"] }),
+  ]);
 
   // The video hero replaces any heroSection on the home page — the video IS the hero.
   // The hardcoded QuoteForm replaces any ctaSection — they'd otherwise duplicate.
@@ -39,6 +39,18 @@ export default async function Home() {
   const BELOW_MAP = new Set(["statsSection", "brandsSection"]);
   const aboveSections = allSections.filter((s) => !BELOW_MAP.has(s._type));
   const belowSections = allSections.filter((s) => BELOW_MAP.has(s._type));
+
+  const addressQuery = site?.address
+    ? [
+        site.address.street,
+        site.address.suburb,
+        site.address.city,
+        site.address.postcode,
+        site.address.region,
+      ]
+        .filter(Boolean)
+        .join(", ")
+    : "Auckland, New Zealand";
 
   return (
     <div className="min-h-screen w-full bg-background text-foreground font-sans">
@@ -78,7 +90,7 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* MAP — office location (kept hardcoded) */}
+      {/* MAP — office location, address sourced from siteSettings */}
       <section className="border-t border-border">
         <div className="container-page pt-16 md:pt-20 lg:pt-24 2xl:pt-28 pb-12 text-center">
           <p className="mb-3 type-eyebrow">
@@ -88,15 +100,15 @@ export default async function Home() {
             Our Office
           </h2>
           <p className="mx-auto mt-5 max-w-xl type-body">
-            Based in Auckland, serving industrial and commercial sites
-            across New Zealand.
+            Based in {site?.address?.city ?? "Auckland"}, serving industrial and commercial sites
+            across {site?.address?.region ?? "New Zealand"}.
           </p>
         </div>
         <div className="container-page pb-16 md:pb-20 lg:pb-24 2xl:pb-28">
           <div className="overflow-hidden border border-border">
             <iframe
               title="NZLCS office location"
-              src="https://www.google.com/maps?q=Auckland,New+Zealand&output=embed"
+              src={`https://www.google.com/maps?q=${encodeURIComponent(addressQuery)}&output=embed`}
               width="100%"
               height="450"
               style={{ border: 0, filter: "grayscale(0.6) contrast(1.1)" }}

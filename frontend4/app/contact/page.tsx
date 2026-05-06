@@ -121,10 +121,16 @@ export default async function ContactPage() {
   const heroSection = page.sections?.find((s) => s._type === "heroSection") ?? null;
   const directContacts = buildDirectContacts(site);
   const addressQuery = site?.address
-    ? [site.address.suburb, site.address.city, site.address.region]
+    ? [
+        site.address.street,
+        site.address.suburb,
+        site.address.city,
+        site.address.postcode,
+        site.address.region,
+      ]
         .filter(Boolean)
-        .join(",")
-    : "Auckland,New+Zealand";
+        .join(", ")
+    : "Auckland, New Zealand";
 
   return (
     <div className="min-h-screen w-full bg-background text-foreground font-sans">
