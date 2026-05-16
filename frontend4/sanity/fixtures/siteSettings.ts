@@ -8,8 +8,8 @@ export const siteSettingsFixture: SiteSettings = {
   primaryEmail: "info@nzlcs.com",
   secondaryEmail: "dan@nzlcs.com",
   address: {
-    street: null,
-    suburb: null,
+    street: "698C Great South Road",
+    suburb: "Penrose",
     city: "Auckland",
     postcode: null,
     region: "New Zealand",

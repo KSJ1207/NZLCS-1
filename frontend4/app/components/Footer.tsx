@@ -12,7 +12,7 @@ type FooterProps = {
 
 function formatAddress(addr: SiteSettings["address"]): string | null {
   if (!addr) return null;
-  const parts = [addr.suburb, addr.city, addr.region].filter(Boolean);
+  const parts = [addr.street, addr.suburb, addr.city].filter(Boolean);
   return parts.length ? parts.join(", ") : null;
 }
 

@@ -211,6 +211,8 @@ function buildSiteSettings(): SanityDocument {
     primaryEmail: "info@nzlcs.com",
     secondaryEmail: "dan@nzlcs.com",
     address: {
+      street: "698C Great South Road",
+      suburb: "Penrose",
       city: "Auckland",
       region: "New Zealand",
     },
